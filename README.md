@@ -1,2 +1,2 @@
-# rscm_patient_app
+# RSCM Patient App
 Create patient apps for RSCM Kencana using Flutter
