@@ -1,3 +1,4 @@
+import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/form_login.dart';
 import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +46,8 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
   Widget build(BuildContext context) {
     return  Container(
       color: Colors.white70,
-      child: SafeArea(
+      child: cardProfile()
+     /* SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -58,12 +60,19 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
             Expanded(
               flex: 1,
               child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: cardProfile()
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
                 child: WidgetFormLogin(),
               ),
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }

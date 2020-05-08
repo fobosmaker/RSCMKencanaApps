@@ -7,13 +7,13 @@ import 'package:blocapiapp/src/model/tab_model.dart';
 //import 'package:flutter/material.dart';
 //import 'package:http/http.dart' show Client, Response;
 class BillingProvider{
-  Future<BillingModel> getDataBilling(String patient_id) async {
+  Future<BillingModel> getDataBilling(String patientId) async {
     String url = 'https://www.rscm.co.id/apirscm/kencana.php';
     Map map = {
       "user_nm":"UMSI",
       "key":"091ae7a29c4795860f69b4077e8b432c",
       //"patient_id":"68485",
-      "patient_id":patient_id,
+      "patient_id":patientId,
       "fungsi":"getBilling"
     };
     var body = json.encode(map);
@@ -27,7 +27,6 @@ class BillingProvider{
       String reply = await response.transform(utf8.decoder).join();
       return new BillingModel(statusCode: jsonDecode(reply)['statusCode'], message: jsonDecode(reply)['message'],  data: convertGetBillingData(jsonDecode(reply)['data']) );
     } catch (e){
-      //return new BillingModel(statusCode: "500", message: e.toString(), data: null);
       throw Exception(e);
     }
   }

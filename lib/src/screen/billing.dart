@@ -1,4 +1,6 @@
 import 'package:blocapiapp/src/bloc/billing_bloc.dart';
+import 'package:blocapiapp/src/screen/page_500.dart';
+import 'package:blocapiapp/src/screen/page_no_data.dart';
 import 'package:blocapiapp/src/view/layout/draft_home.dart';
 import 'package:blocapiapp/src/view/layout/draft_layout_billing.dart';
 import 'package:blocapiapp/src/view/layout/layout_billing.dart';
@@ -26,20 +28,28 @@ class _BillingPageState extends State<BillingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: VerticalLayoutDraftHome(),
+      /*StreamBuilder(
           initialData: bloc.fetchDataBilling("68485"),
           stream: bloc.dataBilling,
           builder: (context,AsyncSnapshot snapshot){
           if(snapshot.connectionState == ConnectionState.active){
-            if(snapshot.hasData){
-              return generateWidget(snapshot.data);
-            } else return Text('yaah gada data');
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+
+            //if error come from API
+            if(snapshot.hasError){
+              print(snapshot.error.toString());
+              return Page500();
+            }
+
+            //if there is no data
+            if(!snapshot.hasData)  return PageNoData();
+
+            //default return generate widget
+            return generateWidget(snapshot.data);
           }
-        }),
+          //default run circular progress
+          return Center(child: CircularProgressIndicator());
+        }),*/
     );
   }
 

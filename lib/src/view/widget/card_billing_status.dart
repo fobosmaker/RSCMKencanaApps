@@ -32,6 +32,11 @@ class _WidgetCardBillingStatusState extends State<WidgetCardBillingStatus> {
                 title: Text('Deposit',style: TextStyle(color: Colors.green, fontWeight: FontWeight.w600),),
                 subtitle: Text('Rp ${formatter.format(int.parse(widget.paid))}', style: TextStyle(color: Colors.black, fontSize:12, fontWeight: FontWeight.w400)),
               ),
+              /*ListTile(
+                leading: Icon(Icons.library_books, color:Colors.green,size: 45,),
+                title: Text('Deposit',style: TextStyle(color: Colors.green, fontWeight: FontWeight.w600),),
+                subtitle: Text('Rp ${formatter.format(int.parse(widget.paid))}', style: TextStyle(color: Colors.black, fontSize:12, fontWeight: FontWeight.w400)),
+              ),*/
             ),
           ),
           Expanded( //UNPAID

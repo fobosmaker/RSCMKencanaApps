@@ -45,13 +45,18 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: Colors.purpleAccent,
-                              borderRadius: BorderRadius.circular(30)
+                        InkWell(
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: Colors.purpleAccent,
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Icon(Icons.receipt, color: Colors.white,),
                           ),
-                          child: Icon(Icons.receipt, color: Colors.white,),
+                          onTap: (){
+                            print('Tagihan Clicked!');
+                          },
                         ),
                         Container(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -67,13 +72,18 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: Colors.tealAccent,
-                              borderRadius: BorderRadius.circular(30)
+                        InkWell(
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: Colors.tealAccent,
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Icon(Icons.restaurant_menu, color: Colors.white,),
                           ),
-                          child: Icon(Icons.restaurant_menu, color: Colors.white,),
+                          onTap: (){
+                            print('Diet Pasien Clicked');
+                          },
                         ),
                         Container(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -89,13 +99,18 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: Colors.yellowAccent,
-                              borderRadius: BorderRadius.circular(30)
+                        InkWell(
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: Colors.yellowAccent,
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Icon(Icons.fastfood, color: Colors.white,),
                           ),
-                          child: Icon(Icons.fastfood, color: Colors.white,),
+                          onTap: (){
+                            print('Gerai Clicked');
+                          },
                         ),
                         Container(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -116,7 +131,6 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               Container(padding: EdgeInsets.fromLTRB(10, 20, 0, 0), child: Text('Promosi', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
               Container(padding: EdgeInsets.fromLTRB(10, 5, 0, 0), child: Text('Ikuti terus promo menarik kami', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
               Container(padding: EdgeInsets.fromLTRB(10, 5, 10, 20), child: Container(color: Colors.pinkAccent, height: 200,child: Center(child: Text('Konten Promosi'))),),
-
             ]),
           ),
           /*SliverPersistentHeader(
