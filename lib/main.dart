@@ -1,13 +1,15 @@
 import 'package:blocapiapp/src/screen/billing.dart';
+import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/login.dart';
 import 'package:blocapiapp/src/view/coba_tabbar.dart';
 import 'package:blocapiapp/src/view/layout/layout_billing.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/billing',
+  initialRoute: '/home',
   routes: {
     '/': (context) => LoginPage(),
+    '/home': (context) => HomePage(),
     '/billing': (context) => BillingPage(),
     '/dev': (context) => CobaTabBar(),
   },

@@ -9,6 +9,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -21,22 +22,24 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             //expandedHeight: 200,
             //centerTitle: true,
             //title on appbar
-            title: Text('home', style: TextStyle(color: Colors.white),),
+            title: Text('Home', style: TextStyle(color: Colors.white),),
             //set icon on right side
             /*actions: <Widget>[
               Icon(Icons.person, color: Colors.black,),
               Icon(Icons.more_vert, color: Colors.black,),
               SizedBox(width: 10,)
             ],*/
-            flexibleSpace: FlexibleSpaceBar(),
+            //flexibleSpace: FlexibleSpaceBar(),
           ),
           SliverList(
             delegate: SliverChildListDelegate([
+
               //card profile pasien
-              Container(padding: EdgeInsets.fromLTRB(0, 20, 0, 10),child: cardProfile()),
-              //menu
+              Container(padding: EdgeInsets.fromLTRB(10,10,10,20),child: cardProfile()),
+
+              //Menu
               Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -124,32 +127,171 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   ],
                 ),
               ),
-              Container(padding: EdgeInsets.fromLTRB(10, 20, 0, 0), child: Text('Edukasi', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
-              Container(padding: EdgeInsets.fromLTRB(10, 5, 0, 0), child: Text('Sharing ilmu kesehatan bersama kami', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
-              Container(padding: EdgeInsets.fromLTRB(10, 5, 10, 0), child: Container(color: Colors.teal, height: 200,child: Center(child: Text('Konten Edukasi'))),),
 
-              Container(padding: EdgeInsets.fromLTRB(10, 20, 0, 0), child: Text('Promosi', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
-              Container(padding: EdgeInsets.fromLTRB(10, 5, 0, 0), child: Text('Ikuti terus promo menarik kami', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
-              Container(padding: EdgeInsets.fromLTRB(10, 5, 10, 20), child: Container(color: Colors.pinkAccent, height: 200,child: Center(child: Text('Konten Promosi'))),),
+              //Menu Edukasi
+              ListTile(
+                contentPadding: EdgeInsets.fromLTRB(10,10,10,0),
+                title: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text('Edukasi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
+                ),
+                subtitle: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text('Sharing ilmu kesehatan bersama kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
+                ),
+                trailing:
+                Container(
+                  child: InkWell(
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                    onTap: (){
+                      print('More Edukasi');
+                    },
+                  )
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              child:  Image(
+                                image: AssetImage('assets/medical-billing-illustration.png'),
+                                fit: BoxFit.cover
+                              )
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                padding: EdgeInsets.all(10),
+                                child:  Image(
+                                    image: AssetImage('assets/medical-billing-illustration.png'),
+                                    fit: BoxFit.cover
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                padding: EdgeInsets.all(10),
+                                child:  Image(
+                                    image: AssetImage('assets/medical-billing-illustration.png'),
+                                    fit: BoxFit.cover
+                                )
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                padding: EdgeInsets.all(10),
+                                child:  Image(
+                                    image: AssetImage('assets/medical-billing-illustration.png'),
+                                    fit: BoxFit.cover
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+                  /**/
+              ),
+
+              //Menu Jadwal Dokter Kencana
+              Container(padding: EdgeInsets.fromLTRB(10, 10, 0, 0), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
+              Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 20), child: Container(color: Colors.blueAccent, child: Image(image: AssetImage('assets/medical-billing-illustration.png'),
+                fit: BoxFit.cover,)),),
+
+              //Menu Promo
+              ListTile(
+                contentPadding: EdgeInsets.fromLTRB(10,10,10,0),
+                title: Container(
+                    padding: EdgeInsets.all(5),
+                    child: Text('Promosi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
+                ),
+                subtitle: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text('Ikuti terus promo menarik kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
+                ),
+                trailing: Container(
+                    child: InkWell(
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                      onTap: (){
+                        print('More Promosi');
+                      },
+                    )
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                height: 200,
+                child:
+                  ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 160.0,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 160.0,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 160.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 160.0,
+                          color: Colors.yellow,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 160.0,
+                          color: Colors.orange,
+                        ),
+                      ),
+                    ],
+                  )
+              ),
             ]),
           ),
-          /*SliverPersistentHeader(
-            delegate:_SliverAppBarDelegate(
-                TabBar(
-                  isScrollable: true,
-                  controller: controller,
-                  tabs: generateTabHeader(widget.data.tab),
-                  indicatorColor: Colors.red,
-                )
-            ),
-            pinned: true,
-          ),
-          SliverFillRemaining(
-            child: TabBarView(
-              controller: controller,
-              children: generateTabView(widget.data.tab),
-            ),
-          ),*/
         ],
       ),
     );

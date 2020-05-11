@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 Widget cardProfile(){
-  return SafeArea(
-    child: Container(
+  return Container(
       decoration: BoxDecoration(
-        color: Colors.white24,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10)
       ),
-      //padding: const EdgeInsets.all(8),
       child: ListTile(
         contentPadding: EdgeInsets.all(10),
         leading: CircleAvatar(
@@ -51,16 +49,20 @@ Widget cardProfile(){
             ),
           ),
         ),
-        trailing: FlatButton.icon(
-            onPressed: (){
-              print('go to setting');
-            },
-            icon: Icon(Icons.settings),
-            label: Text('')),
+        trailing: Container(
+            padding: EdgeInsets.all(5),
+            child: InkWell(
+              child: Icon(
+                Icons.settings,
+              ),
+              onTap: (){
+                print('System Preferences clicked');
+              },
+            )
+        ),
         onTap: (){
           print('profile click');
         },
       ),
-    ),
-  );
+    );
 }
