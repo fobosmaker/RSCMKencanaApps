@@ -166,19 +166,75 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                             flex: 1,
                             child: Container(
                               padding: EdgeInsets.all(10),
-                              child:  Image(
-                                image: AssetImage('assets/medical-billing-illustration.png'),
-                                fit: BoxFit.cover
+                              child:  InkWell(
+                                onTap: (){
+                                  print('Sharing: Edisi Covid-19 Bag(2)');
+                                },
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      Image(
+                                        image: AssetImage('assets/education2.png'),
+                                        fit: BoxFit.cover
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 5),
+                                        child: RichText(
+                                          overflow: TextOverflow.ellipsis,
+                                          strutStyle: StrutStyle(fontSize: 12.0),
+                                          text: TextSpan(
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black,
+                                                fontSize: 15.0
+                                            ),
+                                            text: 'Sharing: Edisi Covid-19 Bag(2)',
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                ),
                               )
+                              /*Image(
+                                image: AssetImage('assets/education2.png'),
+                                fit: BoxFit.cover
+                              )*/
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
                                 padding: EdgeInsets.all(10),
-                                child:  Image(
-                                    image: AssetImage('assets/medical-billing-illustration.png'),
-                                    fit: BoxFit.cover
+                                child:  InkWell(
+                                  onTap: (){
+                                    print('Sharing: Edisi Covid-19 Bag(1)');
+                                  },
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: <Widget>[
+                                        Image(
+                                            image: AssetImage('assets/education2.png'),
+                                            fit: BoxFit.cover
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          child: RichText(
+                                            overflow: TextOverflow.ellipsis,
+                                            strutStyle: StrutStyle(fontSize: 12.0),
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black,
+                                                  fontSize: 15.0
+                                              ),
+                                              text: 'Sharing: Edisi Covid-19 Bag(1)',
+                                            ),
+                                          ),
+                                        ),
+                                      ]
+                                  ),
                                 )
                             ),
                           ),
@@ -194,9 +250,35 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                             flex: 1,
                             child: Container(
                                 padding: EdgeInsets.all(10),
-                                child:  Image(
-                                    image: AssetImage('assets/medical-billing-illustration.png'),
-                                    fit: BoxFit.cover
+                                child:  InkWell(
+                                  onTap: (){
+                                    print('Yuk Cuci Tangan!');
+                                  },
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: <Widget>[
+                                        Image(
+                                            image: AssetImage('assets/education2.png'),
+                                            fit: BoxFit.cover
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          child: RichText(
+                                            overflow: TextOverflow.ellipsis,
+                                            strutStyle: StrutStyle(fontSize: 12.0),
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black,
+                                                  fontSize: 15.0
+                                              ),
+                                              text: 'Yuk Cuci Tangan!',
+                                            ),
+                                          ),
+                                        ),
+                                      ]
+                                  ),
                                 )
                             ),
                           ),
@@ -204,9 +286,35 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                             flex: 1,
                             child: Container(
                                 padding: EdgeInsets.all(10),
-                                child:  Image(
-                                    image: AssetImage('assets/medical-billing-illustration.png'),
-                                    fit: BoxFit.cover
+                                child: InkWell(
+                                  onTap: (){
+                                    print('Mudik? No.. why?');
+                                  },
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: <Widget>[
+                                        Image(
+                                            image: AssetImage('assets/education2.png'),
+                                            fit: BoxFit.cover
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          child: RichText(
+                                            overflow: TextOverflow.ellipsis,
+                                            strutStyle: StrutStyle(fontSize: 12.0),
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black,
+                                                  fontSize: 15.0
+                                              ),
+                                              text: 'Mudik? No.. Why?',
+                                            ),
+                                          ),
+                                        ),
+                                      ]
+                                  ),
                                 )
                             ),
                           ),
@@ -220,7 +328,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
 
               //Menu Jadwal Dokter Kencana
               Container(padding: EdgeInsets.fromLTRB(10, 10, 0, 0), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
-              Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 20), child: Container(color: Colors.blueAccent, child: Image(image: AssetImage('assets/medical-billing-illustration.png'),
+              Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 20), child: Container(color: Colors.blueAccent, child: Image(image: AssetImage('assets/doctor-appointment.png'),
                 fit: BoxFit.cover,)),),
 
               //Menu Promo
@@ -257,6 +365,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         child: Container(
                           width: 160.0,
                           color: Colors.red,
+                          child: Image(
+                              image: AssetImage('assets/promotion1.png'),
+                              fit: BoxFit.cover
+                          )
                         ),
                       ),
                       Padding(
@@ -264,6 +376,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         child: Container(
                           width: 160.0,
                           color: Colors.blue,
+                            child: Image(
+                                image: AssetImage('assets/promotion2.png'),
+                                fit: BoxFit.cover
+                            )
                         ),
                       ),
                       Padding(
@@ -271,6 +387,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         child: Container(
                           width: 160.0,
                           color: Colors.green,
+                          child: Image(
+                              image: AssetImage('assets/promotion1.png'),
+                              fit: BoxFit.cover
+                          )
                         ),
                       ),
                       Padding(
@@ -278,6 +398,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         child: Container(
                           width: 160.0,
                           color: Colors.yellow,
+                          child: Image(
+                              image: AssetImage('assets/promotion2.png'),
+                              fit: BoxFit.cover
+                          )
                         ),
                       ),
                       Padding(
@@ -285,6 +409,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         child: Container(
                           width: 160.0,
                           color: Colors.orange,
+                          child: Image(
+                              image: AssetImage('assets/promotion1.png'),
+                              fit: BoxFit.cover
+                          )
                         ),
                       ),
                     ],

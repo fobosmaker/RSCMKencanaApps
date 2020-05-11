@@ -51,6 +51,10 @@ flutter:
     - assets/medical-billing-illustration.png
     - assets/default_error.png
     - assets/no_data.png
+    - assets/doctor-appointment.png
+    - assets/promotion1.png
+    - assets/promotion2.png
+    - assets/education2.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
