@@ -1,4 +1,4 @@
-import 'package:blocapiapp/src/dynamic_view_tab.dart';
+import 'package:blocapiapp/src/view/layout/dynamic_view_tab.dart';
 import 'package:blocapiapp/src/model/card_example_model.dart';
 import 'package:blocapiapp/src/model/tab_model.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';

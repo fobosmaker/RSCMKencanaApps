@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../dynamic_view_tab.dart';
+import 'dynamic_view_tab.dart';
 
 class VerticalLayoutBilling extends StatefulWidget {
 
