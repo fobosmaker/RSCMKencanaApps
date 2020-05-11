@@ -33,7 +33,7 @@ Widget cardProfile(){
                   color: Colors.blueAccent,
                   fontSize: 20.0
               ),
-              text: 'Kemal',
+              text: 'Kemal Wibisono',
             ),
           ),
         ),
