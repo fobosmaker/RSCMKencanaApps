@@ -25,9 +25,12 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.0+4
   rxdart: ^0.23.1
-  url_launcher: ^5.4.5
+  photo_view: ^0.9.2
+  webview_flutter: ^0.3.21
+  url_launcher: ^5.4.7
   intl: ^0.16.1
   flutter_swiper: ^1.1.6
+
 
 dev_dependencies:
   flutter_test:
@@ -52,9 +55,12 @@ flutter:
     - assets/default_error.png
     - assets/no_data.png
     - assets/doctor-appointment.png
-    - assets/promotion1.png
-    - assets/promotion2.png
-    - assets/education2.png
+    - assets/promo1.jpeg
+    - assets/promo2.jpeg
+    - assets/promo3.jpeg
+    - assets/edukasi1.jpeg
+    - assets/edukasi2.jpeg
+    - assets/edukasi3.jpeg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

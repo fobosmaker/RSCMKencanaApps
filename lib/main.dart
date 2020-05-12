@@ -1,18 +1,19 @@
 import 'package:blocapiapp/src/screen/billing.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
 import 'package:blocapiapp/src/screen/home.dart';
+import 'package:blocapiapp/src/screen/jadwal_dokter.dart';
 import 'package:blocapiapp/src/screen/login.dart';
 import 'package:blocapiapp/src/view/coba_tabbar.dart';
-import 'package:blocapiapp/src/view/layout/layout_billing.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/content',
+  initialRoute: '/home',
   routes: {
     '/': (context) => LoginPage(),
     '/home': (context) => HomePage(),
     '/billing': (context) => BillingPage(),
     '/content': (context) => ContentEdukasiPage(),
+    '/jadwal_dokter': (context) => JadwalDokterPage(),
     '/dev': (context) => CobaTabBar(),
   },
 ));

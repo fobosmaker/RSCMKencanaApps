@@ -1,5 +1,8 @@
+import 'package:blocapiapp/src/view/widget/card_home.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 class VerticalLayoutDraftHome extends StatefulWidget {
   @override
   _VerticalLayoutDraftHomeState createState() => _VerticalLayoutDraftHomeState();
@@ -16,7 +19,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             //backgroundColor: Colors.grey,
             floating: false,
             snap: false,
-            pinned: true,
+            pinned: false,
             //set icon on left side
             //leading: Icon(Icons.arrow_back, color:Colors.white),
             //expandedHeight: 200,
@@ -35,11 +38,11 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             delegate: SliverChildListDelegate([
 
               //card profile pasien
-              Container(padding: EdgeInsets.fromLTRB(10,10,10,20),child: cardProfile()),
+              Container(padding: EdgeInsets.fromLTRB(15,10,15,20),child: cardProfile()),
 
               //Menu
               Container(
-                padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -130,7 +133,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
 
               //Menu Edukasi
               ListTile(
-                contentPadding: EdgeInsets.fromLTRB(10,10,10,0),
+                contentPadding: EdgeInsets.fromLTRB(15,10,15,0),
                 title: Container(
                   padding: EdgeInsets.all(5),
                   child: Text('Edukasi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
@@ -152,188 +155,85 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child:  InkWell(
-                                onTap: (){
-                                  print('Sharing: Edisi Covid-19 Bag(2)');
-                                },
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: <Widget>[
-                                      Image(
-                                        image: AssetImage('assets/education2.png'),
-                                        fit: BoxFit.cover
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 5),
-                                        child: RichText(
-                                          overflow: TextOverflow.ellipsis,
-                                          strutStyle: StrutStyle(fontSize: 12.0),
-                                          text: TextSpan(
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.black,
-                                                fontSize: 15.0
-                                            ),
-                                            text: 'Sharing: Edisi Covid-19 Bag(2)',
-                                          ),
-                                        ),
-                                      ),
-                                    ]
-                                ),
-                              )
-                              /*Image(
-                                image: AssetImage('assets/education2.png'),
-                                fit: BoxFit.cover
-                              )*/
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                padding: EdgeInsets.all(10),
-                                child:  InkWell(
-                                  onTap: (){
-                                    print('Sharing: Edisi Covid-19 Bag(1)');
-                                  },
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: <Widget>[
-                                        Image(
-                                            image: AssetImage('assets/education2.png'),
-                                            fit: BoxFit.cover
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
-                                          child: RichText(
-                                            overflow: TextOverflow.ellipsis,
-                                            strutStyle: StrutStyle(fontSize: 12.0),
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.black,
-                                                  fontSize: 15.0
-                                              ),
-                                              text: 'Sharing: Edisi Covid-19 Bag(1)',
-                                            ),
-                                          ),
-                                        ),
-                                      ]
-                                  ),
-                                )
-                            ),
-                          ),
-                        ],
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  height: 200,
+                  child:
+                  ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi1.jpeg')));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/edukasi1.jpeg',width: 200)
+                        ),
                       ),
-                    ),
-                    Container(
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                padding: EdgeInsets.all(10),
-                                child:  InkWell(
-                                  onTap: (){
-                                    print('Yuk Cuci Tangan!');
-                                  },
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: <Widget>[
-                                        Image(
-                                            image: AssetImage('assets/education2.png'),
-                                            fit: BoxFit.cover
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
-                                          child: RichText(
-                                            overflow: TextOverflow.ellipsis,
-                                            strutStyle: StrutStyle(fontSize: 12.0),
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.black,
-                                                  fontSize: 15.0
-                                              ),
-                                              text: 'Yuk Cuci Tangan!',
-                                            ),
-                                          ),
-                                        ),
-                                      ]
-                                  ),
-                                )
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                padding: EdgeInsets.all(10),
-                                child: InkWell(
-                                  onTap: (){
-                                    print('Mudik? No.. why?');
-                                  },
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: <Widget>[
-                                        Image(
-                                            image: AssetImage('assets/education2.png'),
-                                            fit: BoxFit.cover
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
-                                          child: RichText(
-                                            overflow: TextOverflow.ellipsis,
-                                            strutStyle: StrutStyle(fontSize: 12.0),
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.black,
-                                                  fontSize: 15.0
-                                              ),
-                                              text: 'Mudik? No.. Why?',
-                                            ),
-                                          ),
-                                        ),
-                                      ]
-                                  ),
-                                )
-                            ),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi2.jpeg')));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/edukasi2.jpeg',width: 200)
+                        ),
                       ),
-                    ),
-                  ],
-                )
-                  /**/
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi3.jpeg')));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/edukasi3.jpeg',width: 200)
+                        ),
+                      )
+                    ],
+                  )
               ),
 
               //Menu Jadwal Dokter Kencana
-              Container(padding: EdgeInsets.fromLTRB(10, 10, 0, 0), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
-              Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 20), child: Container(color: Colors.blueAccent, child: Image(image: AssetImage('assets/doctor-appointment.png'),
-                fit: BoxFit.cover,)),),
+              Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 0), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                child: InkWell(
+                  onTap: (){
+                    print('jadwal dokter klik');
+                    _launchInBrowser('https://www.rscm.co.id/index.php?XP_webview_menu=&pageid=254&title=Jadwal%20Dokter%20RSCM%20Kencana');
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/doctor-appointment.png'),
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                          left: 15,
+                          top: 15,
+                          child: Container(
+                            width: 300,
+                            height: 50,
+                            //color: Colors.tealAccent,
+                            child: Text(
+                              'Dapatkan Jadwal Praktek Dokter RSCM Kencana',
+                              style: TextStyle(
+                                color: Colors.teal[400],
+                                  fontSize: 17,
+                                  wordSpacing: 0.5,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.w300
+                              )
+                            )
+                          )
+                      )
+                    ],
+                  ),
+                )
+              ),
 
               //Menu Promo
               ListTile(
-                contentPadding: EdgeInsets.fromLTRB(10,10,10,0),
+                contentPadding: EdgeInsets.fromLTRB(15,10,15,0),
                 title: Container(
                     padding: EdgeInsets.all(5),
                     child: Text('Promosi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
@@ -355,64 +255,36 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                height: 200,
+                height: 175,
                 child:
                   ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 160.0,
-                          color: Colors.red,
-                          child: Image(
-                              image: AssetImage('assets/promotion1.png'),
-                              fit: BoxFit.cover
-                          )
+                      InkWell(
+                        onTap:(){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo1.jpeg')));
+                        },
+                        child:Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/promo1.jpeg',width: 250)
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 160.0,
-                          color: Colors.blue,
-                            child: Image(
-                                image: AssetImage('assets/promotion2.png'),
-                                fit: BoxFit.cover
-                            )
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo2.jpeg')));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/promo2.jpeg',width: 250)
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 160.0,
-                          color: Colors.green,
-                          child: Image(
-                              image: AssetImage('assets/promotion1.png'),
-                              fit: BoxFit.cover
-                          )
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 160.0,
-                          color: Colors.yellow,
-                          child: Image(
-                              image: AssetImage('assets/promotion2.png'),
-                              fit: BoxFit.cover
-                          )
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 160.0,
-                          color: Colors.orange,
-                          child: Image(
-                              image: AssetImage('assets/promotion1.png'),
-                              fit: BoxFit.cover
-                          )
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo3.jpeg')));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CardHome(imageAsset: 'assets/promo3.jpeg',width: 250)
                         ),
                       ),
                     ],
@@ -421,6 +293,40 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             ]),
           ),
         ],
+      ),
+    );
+  }
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        //headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+}
+
+class SelectedImage extends StatelessWidget {
+
+  String imageURL;
+
+  SelectedImage({this.imageURL});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      body: Container(
+          child: PhotoView(
+            imageProvider: AssetImage(imageURL),
+          )
       ),
     );
   }
