@@ -3,11 +3,12 @@ import 'package:blocapiapp/src/model/card_example_model.dart';
 import 'package:blocapiapp/src/model/tab_model.dart';
 import 'package:blocapiapp/src/view/widget/card_billing_status.dart';
 import 'package:blocapiapp/src/view/widget/card_billing_with_detail.dart';
-import 'package:blocapiapp/src/view/widget/card_detail_billing.dart';
+import 'package:blocapiapp/src/view/widget/circle_point_detail_billing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 import 'dynamic_view_tab.dart';
 
@@ -24,6 +25,7 @@ class VerticalLayoutBilling extends StatefulWidget {
 class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with SingleTickerProviderStateMixin {
 
   TabController controller;
+  NumberFormat formatter = new NumberFormat("#,###");
 
   @override
   void initState() {
@@ -40,32 +42,51 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.teal,
+        title: Text('Tagihan', style: TextStyle(color: Colors.white)),
+      ),
       body: NestedScrollView(
-          //controller: ,
           headerSliverBuilder: (context, isScrolled){
             return <Widget>[
-              SliverAppBar(
-                //backgroundColor: Colors.grey,
-                floating: false,
-                snap: false,
-                pinned: true,
-                //set icon on left side
-                leading: Icon(Icons.arrow_back, color:Colors.white),
-                //title on appbar
-                title: Text('Tagihan', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
-                //set icon on right side
-                /*actions: <Widget>[
-              Icon(Icons.person, color: Colors.black,),
-              Icon(Icons.more_vert, color: Colors.black,),
-              SizedBox(width: 10,)
-            ],*/
-              ),
               SliverList(
                 delegate: SliverChildListDelegate([
-                  Container(padding: EdgeInsets.all(10), child: Text('Rangkuman:'),),
-                  WidgetCardBillingDetail(widget.data.data.tab, widget.data.data.totalSummary),
-                  WidgetCardBillingStatus(widget.data.data.totalDeposit,widget.data.data.totalTagihan),
-                  Container(padding: EdgeInsets.all(10), color: Colors.white, child: Text('Detail Tagihan:'),),
+                  Container(padding: EdgeInsets.fromLTRB(15, 20, 0, 0), child: Text('Rangkuman', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
+                  Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 10), child: Text('Poin-poin infromasi mengenai tagihan anda', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  CirclePointDetailBilling(title: 'Total', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalSummary))}', icon: Icons.receipt, color: Colors.blueAccent),
+                                  CirclePointDetailBilling(title: 'Deposit', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalDeposit))}', icon: Icons.arrow_upward, color: Colors.greenAccent),
+                                  CirclePointDetailBilling(title: 'Tagihan', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalTagihan))}', icon: Icons.arrow_downward, color: Colors.deepOrangeAccent),
+                                ],
+                              ),
+                            ),
+                            Container(
+                                child: ExpansionTile(
+                                  title: Text('More detail'),
+                                  children: <Widget>[
+                                    WidgetCardBillingDetail(widget.data.data.tab, widget.data.data.totalSummary),
+                                  ],
+                                )
+                            ),
+                          ],
+                        )
+                    ),
+                  ),
+                  Container(padding: EdgeInsets.fromLTRB(15, 20, 0, 0), child: Text('Detail Tagihan', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
+                  Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 10), child: Text('Rincian detil dari poin-poin informasi tagihan anda', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
                 ]),
               ),
               SliverPersistentHeader(
@@ -138,7 +159,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return new Container(
       color: Colors.white,
       child: _tabBar,
-      //margin: EdgeInsets.symmetric(vertical: _tabBar.preferredSize.height, horizontal: 0),
     );
   }
 
@@ -167,9 +187,6 @@ class _HorizontalLayoutBillingState extends State<HorizontalLayoutBilling> with 
 
   @override
   void initState() {
-    /*for(int i = 1; i <= 5; i++){
-      dataTabModel.add(new TabModel(id: i, content: 'Cluster $i', data: generateData(i), total: 50000));
-    }*/
     controller = new TabController(length: dataTabModel.length, vsync: this);
     super.initState();
   }

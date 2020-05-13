@@ -14,7 +14,6 @@ void main() => runApp(MaterialApp(
     '/billing': (context) => BillingPage(),
     '/content': (context) => ContentEdukasiPage(),
     '/jadwal_dokter': (context) => JadwalDokterPage(),
-    '/dev': (context) => CobaTabBar(),
   },
 ));
 /*void main() => runApp(MyApp());

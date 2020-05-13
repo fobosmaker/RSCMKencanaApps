@@ -28,9 +28,9 @@ class _BillingPageState extends State<BillingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VerticalLayoutDraftHome(),
-      /*StreamBuilder(
-          initialData: bloc.fetchDataBilling("68485"),
+      body: //VerticalLayoutDraftHome(),
+      StreamBuilder(
+          initialData: bloc.fetchDataBilling("1190155"),
           stream: bloc.dataBilling,
           builder: (context,AsyncSnapshot snapshot){
           if(snapshot.connectionState == ConnectionState.active){
@@ -49,7 +49,7 @@ class _BillingPageState extends State<BillingPage> {
           }
           //default run circular progress
           return Center(child: CircularProgressIndicator());
-        }),*/
+        }),
     );
   }
 

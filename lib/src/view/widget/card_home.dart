@@ -13,10 +13,11 @@ class _CardHomeState extends State<CardHome> {
   Widget build(BuildContext context) {
     return Container(
         width: widget.width,
-        color: Colors.white70,
-        child: Image(
-            image: AssetImage(widget.imageAsset),
-            fit: BoxFit.cover
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+                  image: AssetImage(widget.imageAsset),
+                  fit: BoxFit.fitWidth)
         )
     );
   }

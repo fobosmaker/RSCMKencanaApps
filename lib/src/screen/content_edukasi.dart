@@ -1,8 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import 'SelectedImage.dart';
 
 class ContentEdukasiPage extends StatefulWidget {
   @override
   _ContentEdukasiPageState createState() => _ContentEdukasiPageState();
+}
+
+List<StaggeredTile> _myStaggeredTiles = const<StaggeredTile>[
+  const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+
+  const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+
+];
+
+List<Widget> _tiles = const <Widget>[
+  const _Example01Tile(Colors.white70, Icons.widgets, 'assets/edukasi7.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.wifi, 'assets/edukasi8.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.panorama_wide_angle, 'assets/edukasi9.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.map, 'assets/edukasi10.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.send, 'assets/edukasi11.jpeg'),
+
+  const _Example01Tile(Colors.white70, Icons.airline_seat_flat, 'assets/edukasi12.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.bluetooth, 'assets/edukasi13.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.battery_alert, 'assets/edukasi4.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.desktop_windows, 'assets/edukasi2.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.radio, 'assets/edukasi1.jpeg'),
+
+  const _Example01Tile(Colors.white70, Icons.widgets, 'assets/edukasi14.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.wifi, 'assets/edukasi15.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.panorama_wide_angle, 'assets/edukasi5.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.map, 'assets/edukasi3.jpeg'),
+  const _Example01Tile(Colors.white70, Icons.send, 'assets/edukasi6.jpeg'),
+];
+
+class _Example01Tile extends StatelessWidget {
+  const _Example01Tile(this.backgroundColor, this.iconData, this.imageUrl);
+
+  final Color backgroundColor;
+  final IconData iconData;
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return new InkWell(
+            child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: backgroundColor,
+              image: DecorationImage(
+                  image: AssetImage(imageUrl),
+                  fit: BoxFit.fitWidth)
+          )
+      ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: imageUrl)));
+      },
+    );
+  }
 }
 
 class _ContentEdukasiPageState extends State<ContentEdukasiPage> {
@@ -10,54 +80,20 @@ class _ContentEdukasiPageState extends State<ContentEdukasiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Content'),
+        centerTitle: true,
+        title: Text('Edukasi'),
+        backgroundColor: Colors.teal,
       ),
-      body: ListView(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          Image(
-            image: AssetImage('assets/education2.png'),
-            height:250,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Text(
-                  'Mauris non tortor ipsu praesant ipsum libero',
-                style: TextStyle(
-                  letterSpacing: 1,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800
-                ),
-              ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-            child: Text(
-              'Alexander Pierce',
-              style: TextStyle(
-                  letterSpacing: 1,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300
-              ),
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-              child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 1,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+      body:
+      new Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: new StaggeredGridView.count(
+            crossAxisCount: 4,
+            staggeredTiles: _myStaggeredTiles,
+            children: _tiles,
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
+            padding: const EdgeInsets.all(4.0),
+          )));
   }
 }

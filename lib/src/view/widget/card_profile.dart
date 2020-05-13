@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 Widget cardProfile(){
   return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.grey[50],
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(
         contentPadding: EdgeInsets.all(10),
         leading: CircleAvatar(
-          radius: 35,
+          radius: 40,
           child: Text(
               'K',
               style: TextStyle(
@@ -18,7 +18,7 @@ Widget cardProfile(){
                   fontSize: 30.0
                 ),
               ),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.teal,
         ),
         title: Container(
           padding: EdgeInsets.all(4),
@@ -28,7 +28,7 @@ Widget cardProfile(){
             text: TextSpan(
               style: TextStyle(
                   fontWeight: FontWeight.w800,
-                  color: Colors.blueAccent,
+                  color: Colors.black,
                   fontSize: 20.0
               ),
               text: 'Kemal Wibisono',
@@ -50,15 +50,8 @@ Widget cardProfile(){
           ),
         ),
         trailing: Container(
-            padding: EdgeInsets.all(5),
-            child: InkWell(
-              child: Icon(
-                Icons.settings,
-              ),
-              onTap: (){
-                print('System Preferences clicked');
-              },
-            )
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Icon(Icons.settings)
         ),
         onTap: (){
           print('profile click');

@@ -1,7 +1,11 @@
+import 'package:blocapiapp/src/screen/SelectedImage.dart';
+import 'package:blocapiapp/src/screen/billing.dart';
+import 'package:blocapiapp/src/screen/content_edukasi.dart';
 import 'package:blocapiapp/src/view/widget/card_home.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
+import 'package:blocapiapp/src/view/widget/circle_button_menu_home.dart';
+import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 class VerticalLayoutDraftHome extends StatefulWidget {
   @override
@@ -12,25 +16,40 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            //backgroundColor: Colors.grey,
+            backgroundColor: Colors.teal,
             floating: false,
             snap: false,
-            pinned: false,
+            pinned: true,
             //set icon on left side
-            //leading: Icon(Icons.arrow_back, color:Colors.white),
+            leading: Container(),
             //expandedHeight: 200,
-            //centerTitle: true,
+            centerTitle: true,
             //title on appbar
-            title: Text('Home', style: TextStyle(color: Colors.white),),
+            title: Container(
+                padding: EdgeInsets.all(4),
+                height: 37,
+                width: 75,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/rscm_kencana_logo.jpg'),
+                      fit: BoxFit.fill
+                  ),
+                )
+            ),
+            //Text('RSCM Kencana', style: TextStyle(color: Colors.white),),
             //set icon on right side
             /*actions: <Widget>[
-              Icon(Icons.person, color: Colors.black,),
-              Icon(Icons.more_vert, color: Colors.black,),
-              SizedBox(width: 10,)
+              InkWell(
+                  child: Icon(Icons.settings, color: Colors.white,),
+                  onTap: (){
+                    print('setting clicked');
+                  },
+              ),
+              SizedBox(width: 15,)
             ],*/
             //flexibleSpace: FlexibleSpaceBar(),
           ),
@@ -38,95 +57,20 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             delegate: SliverChildListDelegate([
 
               //card profile pasien
-              Container(padding: EdgeInsets.fromLTRB(15,10,15,20),child: cardProfile()),
+              Container(
+                  padding: EdgeInsets.fromLTRB(0,0,0,5),
+                  child: cardProfile()
+              ),
 
               //Menu
               Container(
-                padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+                padding: EdgeInsets.fromLTRB(15, 30, 15, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                color: Colors.purpleAccent,
-                                borderRadius: BorderRadius.circular(30)
-                            ),
-                            child: Icon(Icons.receipt, color: Colors.white,),
-                          ),
-                          onTap: (){
-                            print('Tagihan Clicked!');
-                          },
-                        ),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                            child: Text(
-                              'Tagihan',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-                            )
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                color: Colors.tealAccent,
-                                borderRadius: BorderRadius.circular(30)
-                            ),
-                            child: Icon(Icons.restaurant_menu, color: Colors.white,),
-                          ),
-                          onTap: (){
-                            print('Diet Pasien Clicked');
-                          },
-                        ),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                            child: Text(
-                              'Diet Pasien',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-                            )
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                color: Colors.yellowAccent,
-                                borderRadius: BorderRadius.circular(30)
-                            ),
-                            child: Icon(Icons.fastfood, color: Colors.white,),
-                          ),
-                          onTap: (){
-                            print('Gerai Clicked');
-                          },
-                        ),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                            child: Text(
-                              'Gerai',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-                            )
-                        ),
-                      ],
-                    ),
+                    CircleButtonMenuHome(title: 'Tagihan', color: Colors.lightBlueAccent, icon: Icons.receipt, onclick: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => BillingPage())); }),
+                    CircleButtonMenuHome(title: 'Diet Pasien', color: Colors.redAccent, icon: Icons.restaurant_menu, onclick: (){ print('gizi clicked'); }),
+                    CircleButtonMenuHome(title: 'Gerai', color: Colors.orangeAccent, icon: Icons.fastfood, onclick: (){ print('tenant clicked'); }),
                   ],
                 ),
               ),
@@ -135,11 +79,11 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               ListTile(
                 contentPadding: EdgeInsets.fromLTRB(15,10,15,0),
                 title: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
                   child: Text('Edukasi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
                 ),
                 subtitle: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                   child: Text('Sharing ilmu kesehatan bersama kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                 ),
                 trailing:
@@ -147,45 +91,95 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   child: InkWell(
                     child: Icon(
                       Icons.arrow_forward_ios,
+                      color: Colors.teal,
                     ),
                     onTap: (){
-                      print('More Edukasi');
+                      Navigator.push(context, MaterialPageRoute( builder: (context) => ContentEdukasiPage() ));
                     },
                   )
                 ),
               ),
               Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  height: 200,
+                  padding: EdgeInsets.fromLTRB(15, 5, 15, 20),
+                  height: 150,
                   child:
                   ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi1.jpeg')));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi7.jpeg')));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: CardHome(imageAsset: 'assets/edukasi1.jpeg',width: 200)
+                          padding: const EdgeInsets.fromLTRB(0,0,10,0),
+                          child: CardHome(imageAsset: 'assets/edukasi7.jpeg',width: 150)
                         ),
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi2.jpeg')));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi8.jpeg')));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: CardHome(imageAsset: 'assets/edukasi2.jpeg',width: 200)
+                            padding: const EdgeInsets.fromLTRB(5, 0, 10, 0),
+                            child: CardHome(imageAsset: 'assets/edukasi8.jpeg',width: 150)
                         ),
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi3.jpeg')));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi9.jpeg')));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: CardHome(imageAsset: 'assets/edukasi3.jpeg',width: 200)
+                            padding: const EdgeInsets.fromLTRB(5, 0, 10, 0),
+                            child: CardHome(imageAsset: 'assets/edukasi9.jpeg',width: 150)
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi10.jpeg')));
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 10, 0),
+                            child: CardHome(imageAsset: 'assets/edukasi10.jpeg',width: 150)
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/edukasi11.jpeg')));
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 10, 0),
+                            child: CardHome(imageAsset: 'assets/edukasi11.jpeg',width: 150)
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute( builder: (context) => ContentEdukasiPage() ));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5,0,0,0),
+                          child: Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.teal,
+                              ),
+                              child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(Icons.arrow_forward, color: Colors.white),
+                                Container(
+                                    padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                    child: Text(
+                                      'Lihat lebih banyak',
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Colors.white),
+                                    )
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       )
                     ],
@@ -246,6 +240,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                     child: InkWell(
                       child: Icon(
                         Icons.arrow_forward_ios,
+                        color: Colors.teal,
                       ),
                       onTap: (){
                         print('More Promosi');
@@ -254,7 +249,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                padding: EdgeInsets.fromLTRB(15, 5, 15, 20),
                 height: 175,
                 child:
                   ListView(
@@ -265,7 +260,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo1.jpeg')));
                         },
                         child:Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                           child: CardHome(imageAsset: 'assets/promo1.jpeg',width: 250)
                         ),
                       ),
@@ -283,8 +278,8 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo3.jpeg')));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: CardHome(imageAsset: 'assets/promo3.jpeg',width: 250)
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                            child: CardHome(imageAsset: 'assets/promo3.jpeg',width: 250)
                         ),
                       ),
                     ],
@@ -308,26 +303,5 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
     } else {
       throw 'Could not launch $url';
     }
-  }
-}
-
-class SelectedImage extends StatelessWidget {
-
-  String imageURL;
-
-  SelectedImage({this.imageURL});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
-      body: Container(
-          child: PhotoView(
-            imageProvider: AssetImage(imageURL),
-          )
-      ),
-    );
   }
 }
