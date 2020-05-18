@@ -1,6 +1,7 @@
 import 'package:blocapiapp/src/screen/SelectedImage.dart';
 import 'package:blocapiapp/src/screen/billing.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
+import 'package:blocapiapp/src/screen/more_menu.dart';
 import 'package:blocapiapp/src/view/widget/card_home.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/circle_button_menu_home.dart';
@@ -40,17 +41,16 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   ),
                 )
             ),
-            //Text('RSCM Kencana', style: TextStyle(color: Colors.white),),
             //set icon on right side
-            /*actions: <Widget>[
+            actions: <Widget>[
               InkWell(
-                  child: Icon(Icons.settings, color: Colors.white,),
+                  child: Icon(Icons.more_vert, color: Colors.white,),
                   onTap: (){
-                    print('setting clicked');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MoreMenuPage()));
                   },
               ),
-              SizedBox(width: 15,)
-            ],*/
+              SizedBox(width: 15)
+            ],
             //flexibleSpace: FlexibleSpaceBar(),
           ),
           SliverList(

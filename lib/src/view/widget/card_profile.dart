@@ -49,10 +49,10 @@ Widget cardProfile(){
             ),
           ),
         ),
-        trailing: Container(
+        /*trailing: Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
             child: Icon(Icons.settings)
-        ),
+        ),*/
         onTap: (){
           print('profile click');
         },
