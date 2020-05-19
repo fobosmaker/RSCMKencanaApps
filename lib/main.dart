@@ -5,11 +5,12 @@ import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/jadwal_dokter.dart';
 import 'package:blocapiapp/src/screen/login.dart';
 import 'package:blocapiapp/src/screen/more_menu.dart';
+import 'package:blocapiapp/src/screen/register.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  initialRoute: '/home',
+  initialRoute: '/register',
   routes: {
     '/': (context) => LoginPage(),
     '/home': (context) => HomePage(),
@@ -18,5 +19,6 @@ void main() => runApp(MaterialApp(
     '/jadwal_dokter': (context) => JadwalDokterPage(),
     '/more': (context) => MoreMenuPage(),
     '/profile': (context) => AboutPage(),
+    '/register': (context) => RegisterPage(),
   },
 ));

@@ -41,7 +41,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
               Divider(
                 color: Colors.grey[300],
               ),
-              InkWell(
+             /* InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AccountPage()));
                 },
@@ -59,7 +59,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
               ),
               Divider(
                 color: Colors.grey[300],
-              ),
+              ),*/
               InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage() ));

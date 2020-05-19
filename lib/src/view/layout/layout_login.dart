@@ -46,8 +46,7 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
   Widget build(BuildContext context) {
     return  Container(
       color: Colors.white70,
-      child: cardProfile()
-     /* SafeArea(
+      child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -60,19 +59,12 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
             Expanded(
               flex: 1,
               child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: cardProfile()
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
                 child: WidgetFormLogin(),
               ),
             ),
           ],
         ),
-      ),*/
+      ),
     );
   }
 }

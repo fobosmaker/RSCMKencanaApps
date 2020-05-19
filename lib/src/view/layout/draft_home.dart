@@ -5,7 +5,6 @@ import 'package:blocapiapp/src/screen/more_menu.dart';
 import 'package:blocapiapp/src/view/widget/card_home.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/circle_button_menu_home.dart';
-import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 class VerticalLayoutDraftHome extends StatefulWidget {
@@ -83,11 +82,10 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   child: Text('Edukasi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
                 ),
                 subtitle: Container(
-                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Text('Sharing ilmu kesehatan bersama kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                 ),
-                trailing:
-                Container(
+                trailing: Container(
                   child: InkWell(
                     child: Icon(
                       Icons.arrow_forward_ios,
@@ -100,7 +98,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                 ),
               ),
               Container(
-                  padding: EdgeInsets.fromLTRB(15, 5, 15, 20),
+                  padding: EdgeInsets.fromLTRB(15, 5, 0, 20),
                   height: 150,
                   child:
                   ListView(
@@ -156,7 +154,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                           Navigator.push(context, MaterialPageRoute( builder: (context) => ContentEdukasiPage() ));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(5,0,0,0),
+                          padding: const EdgeInsets.fromLTRB(5,0,15,0),
                           child: Container(
                               height: 150,
                               width: 150,
@@ -187,7 +185,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               ),
 
               //Menu Jadwal Dokter Kencana
-              Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 0), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
+              Container(padding: EdgeInsets.fromLTRB(15, 20, 0, 5), child: Text('Jadwal Dokter', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
                 child: InkWell(
@@ -227,13 +225,13 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
 
               //Menu Promo
               ListTile(
-                contentPadding: EdgeInsets.fromLTRB(15,10,15,0),
+                contentPadding: EdgeInsets.fromLTRB(15,20,15,0),
                 title: Container(
                     padding: EdgeInsets.all(5),
                     child: Text('Promosi', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
                 ),
                 subtitle: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.only(left:5, bottom: 5),
                   child: Text('Ikuti terus promo menarik kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                 ),
                 trailing: Container(
@@ -249,7 +247,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(15, 5, 15, 20),
+                padding: EdgeInsets.fromLTRB(15, 5, 0, 20),
                 height: 175,
                 child:
                   ListView(
@@ -278,7 +276,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: 'assets/promo3.jpeg')));
                         },
                         child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(5, 0, 15, 0),
                             child: CardHome(imageAsset: 'assets/promo3.jpeg',width: 250)
                         ),
                       ),

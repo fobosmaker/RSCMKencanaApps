@@ -1,3 +1,6 @@
+import 'package:blocapiapp/src/screen/change_password.dart';
+import 'package:blocapiapp/src/view/widget/card_profile.dart';
+import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
 import 'package:flutter/material.dart';
 class ProfilePage extends StatefulWidget {
   @override
@@ -8,268 +11,82 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text('Profil'),
         centerTitle: true,
         backgroundColor: Colors.teal,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 15),
-        //color: Colors.grey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
           children: <Widget>[
-            Container(
-              child: ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+            Padding(
+              padding: EdgeInsets.only(top:10),
+              child: cardProfile(),
+            ),
+            ListTile(
+                contentPadding: EdgeInsets.fromLTRB(15,20,15,0),
                 title: Container(
-                  padding: EdgeInsets.all(4),
-                  child: RichText(
-                    overflow: TextOverflow.ellipsis,
-                    strutStyle: StrutStyle(fontSize: 12.0),
-                    text: TextSpan(
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black,
-                          fontSize: 20.0,
-                      ),
-                      text: 'Informasi data diri pasien',
-                    ),
-                  ),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+                    child: Text('Akun', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700))
                 ),
-                trailing: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    child: Icon(Icons.arrow_forward_ios, color: Colors.teal,)
+                subtitle: Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                  child: Text('Setting password untuk akun anda', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                 ),
+                trailing : FlatButton.icon(
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordPage() ));
+                    },
+                    icon: Icon(Icons.edit),
+                    label: Text('Ubah')
+                )
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                child: ListTileDetailProfile(title: 'Email', content: 'wibisonokemal@gmail.com', icon: Icons.email),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.fromLTRB(15,20,15,0),
+              title: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+                  child: Text('Biodata', style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
+              ),
+              subtitle: Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                child: Text('Profil pasien dalam sistem electornic health record', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
               ),
             ),
             Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(10),
-                  leading: CircleAvatar(
-                    radius: 40,
-                    child: Text(
-                      'K',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                          fontSize: 30.0
-                      ),
-                    ),
-                    backgroundColor: Colors.teal,
-                  ),
-                  title: Container(
-                    padding: EdgeInsets.all(4),
-                    child: RichText(
-                      overflow: TextOverflow.ellipsis,
-                      strutStyle: StrutStyle(fontSize: 12.0),
-                      text: TextSpan(
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5
-                        ),
-                        text: 'Kemal Wibisono',
-                      ),
-                    ),
-                  ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    ListTileDetailProfile(title: 'Tempat tanggal lahir', content: 'Jakarta, 25 Februari 1993', icon: Icons.cake),
+                    Divider(color: Colors.grey[300]),
+                    ListTileDetailProfile(title: 'Nomor Rekam Medik', content: '443-79-01', icon: Icons.confirmation_number),
+                    Divider(color: Colors.grey[300]),
+                    ListTileDetailProfile(title: 'Jenis Kelamin', content: 'Laki-laki', icon: Icons.person),
+                    Divider(color: Colors.grey[300]),
+                    ListTileDetailProfile(title: 'Alamat', content: 'Komplek jati unggul blok a 11 no 16 harapan jaya bekasi utara Kota Bekasi', icon: Icons.home),
+                    Divider(color: Colors.grey[300]),
+                    ListTileDetailProfile(title: 'Telepon', content: '082143530880', icon: Icons.phone)
+                  ],
                 )
-            ),
-            Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  leading: Icon(Icons.cake, color: Colors.grey,),
-                  title: Text(
-                      'Tempat tanggal lahir',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 13
-                      )
-                  ),
-                  subtitle: Text(
-                      'Jakarta, 25 Februari 1993',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          letterSpacing: 0.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300
-                      )
-                  ),
-                )
-            ),
-            Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  leading: Icon(Icons.confirmation_number, color: Colors.grey,),
-                  title: Text(
-                      'Nomor rekam medik',
-                      style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: 13
-                    )
-                  ),
-                  subtitle: Text(
-                      '433-xxx-xxx',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          letterSpacing: 0.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300
-                      )
-                  ),
-                )
-            ),
-            Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  leading: Icon(Icons.perm_identity, color: Colors.grey,),
-                  title: Text(
-                      'Jenis Kelamin',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 13
-                      )
-                  ),
-                  subtitle: Text(
-                      'Laki-laki',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          letterSpacing: 0.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300
-                      )
-                  ),
-                )
-            ),
-            Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  leading: Icon(Icons.home, color: Colors.grey,),
-                  title: Text(
-                      'Alamat',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 13
-                      )
-                  ),
-                  subtitle: Text(
-                      'Komplek jati unggul blok a 11 no 16 harapan jaya bekasi utara Kota Bekasi',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          letterSpacing: 0.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300
-                      )
-                  ),
-                )
-            ),
-            Container(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  leading: Icon(Icons.phone, color: Colors.grey,),
-                  title: Text(
-                      'Telepon',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 13
-                      )
-                  ),
-                  subtitle: Text(
-                      '082143530880',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          letterSpacing: 0.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300
-                      )
-                  ),
-                )
-            ),
+            )
           ],
         ),
       )
-     /* Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Center(
-            child: CircleAvatar(
-              radius: 40,
-              child: Text(
-                'K',
-                style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                    fontSize: 30.0
-                ),
-              ),
-              backgroundColor: Colors.teal,
-            )
-          ),
-          Divider(
-            height: 60.0,
-            color: Colors.grey[100],
-          ),
-          Text(
-            'Name: ',
-            style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            'Unknown',
-            style: TextStyle(
-                color: Colors.amberAccent,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold
-            ),
-          ),
-          SizedBox(height: 30.0),
-          Text(
-            'level: ',
-            style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            '1',
-            style: TextStyle(
-                color: Colors.amberAccent,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold
-            ),
-          ),
-          SizedBox(height: 30.0),
-          Text(
-            'Email: ',
-            style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.email,
-                color: Colors.grey,
-              ),
-              SizedBox(width : 10.0),
-              Text(
-                'unknown@people.com',
-                style: TextStyle(
-                  color: Colors.amberAccent,
-                  fontSize: 18.0,
-                ),
-              )
-            ],
-          )
-        ],
-      ),*/
     );
   }
 }

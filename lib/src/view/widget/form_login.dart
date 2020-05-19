@@ -1,5 +1,6 @@
 import 'package:blocapiapp/src/bloc/user_bloc.dart';
 import 'package:blocapiapp/src/model/login_model.dart';
+import 'package:blocapiapp/src/screen/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -58,12 +59,13 @@ class _WidgetFormLoginState extends State<WidgetFormLogin> {
                       print('cek state: ${snapshot.connectionState}');
                       if(snapshot.connectionState == ConnectionState.active){
                         if(snapshot.hasData){
-                          LoginModel result = snapshot.data;
-                          if(result.statusCode == "200") print('login sukses');
-                          else print(result.message);
+                          //LoginModel result = snapshot.data;
+                          //if(result.statusCode == "200") print('login sukses');
+                          //else print(result.message);
                           WidgetsBinding.instance.addPostFrameCallback((_){
                             setState(() {
                               isClick = false;
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage() ));
                             });
                           });
                           return Container();
