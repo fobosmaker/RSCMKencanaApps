@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/model/billing_model.dart';
 import 'package:blocapiapp/src/model/tab_model.dart';
 import 'package:blocapiapp/src/view/widget/card_billing_with_detail.dart';
@@ -43,11 +44,11 @@ class _VerticalLayoutDraftBillingState extends State<VerticalLayoutDraftBilling>
             snap: false,
             pinned: true,
             //set icon on left side
-            leading: Icon(Icons.arrow_back, color:Colors.white),
+            leading: Icon(Icons.arrow_back, color:defaultAppbarContentColor),
             expandedHeight: 200,
             centerTitle: true,
             //title on appbar
-            title: Text('Tagihan', style: TextStyle(color: Colors.white),),
+            title: Text('Tagihan', style: TextStyle(color:defaultAppbarContentColor)),
             //set icon on right side
             /*actions: <Widget>[
               Icon(Icons.person, color: Colors.black,),
@@ -258,8 +259,6 @@ List<Widget> generateTabView(List<TabModel> dataTabModel){
   List<Widget> widget = [];
   for(int i = 0; i < dataTabModel.length; i++){
     widget.add(SingleChildScrollView(child: DynamicViewTab(dataTabModel[i]), scrollDirection: Axis.vertical,));
-    //widget.add(DynamicViewTab(dataTabModel[i]));
-
   }
   return widget;
 }

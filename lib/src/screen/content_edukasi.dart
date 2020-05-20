@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -82,7 +83,7 @@ class _ContentEdukasiPageState extends State<ContentEdukasiPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Edukasi'),
-        backgroundColor: Colors.teal,
+        backgroundColor: defaultAppbarColor,
       ),
       body:
       new Padding(

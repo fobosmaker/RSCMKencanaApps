@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/model/billing_model.dart';
 import 'package:blocapiapp/src/model/card_example_model.dart';
 import 'package:blocapiapp/src/model/tab_model.dart';
@@ -44,8 +45,8 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.teal,
-        title: Text('Tagihan', style: TextStyle(color: Colors.white)),
+        backgroundColor: defaultAppbarColor,
+        title: Text('Tagihan', style: TextStyle(color: defaultAppbarContentColor)),
       ),
       body: NestedScrollView(
           headerSliverBuilder: (context, isScrolled){
@@ -168,7 +169,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
 }
-
 
 class HorizontalLayoutBilling extends StatefulWidget {
 

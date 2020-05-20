@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/change_password.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
@@ -15,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: Text('Profil'),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: defaultAppbarColor,
       ),
       body: Container(
         child: ListView(

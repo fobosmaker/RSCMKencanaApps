@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/SelectedImage.dart';
 import 'package:blocapiapp/src/screen/billing.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
@@ -20,7 +21,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.teal,
+            backgroundColor: defaultAppbarColor,
             floating: false,
             snap: false,
             pinned: true,
@@ -43,14 +44,13 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
             //set icon on right side
             actions: <Widget>[
               InkWell(
-                  child: Icon(Icons.more_vert, color: Colors.white,),
+                  child: Icon(Icons.more_vert, color: defaultAppbarContentColor),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => MoreMenuPage()));
                   },
               ),
               SizedBox(width: 15)
             ],
-            //flexibleSpace: FlexibleSpaceBar(),
           ),
           SliverList(
             delegate: SliverChildListDelegate([
@@ -89,7 +89,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   child: InkWell(
                     child: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.teal,
+                      color: defaultAppbarColor,
                     ),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute( builder: (context) => ContentEdukasiPage() ));
@@ -160,7 +160,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.teal,
+                                color: defaultAppbarColor,
                               ),
                               child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -238,7 +238,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                     child: InkWell(
                       child: Icon(
                         Icons.arrow_forward_ios,
-                        color: Colors.teal,
+                        color: defaultAppbarColor,
                       ),
                       onTap: (){
                         print('More Promosi');

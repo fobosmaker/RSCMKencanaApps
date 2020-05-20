@@ -1,5 +1,4 @@
 import 'package:blocapiapp/src/bloc/user_bloc.dart';
-import 'package:blocapiapp/src/model/login_model.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

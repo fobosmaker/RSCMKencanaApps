@@ -52,6 +52,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/rscm_kencana_logo.jpg
+    - assets/rscm_kencana.jpg
     - assets/medical-billing-illustration.png
     - assets/default_error.png
     - assets/no_data.png

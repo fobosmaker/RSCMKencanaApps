@@ -1,5 +1,5 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/about.dart';
-import 'package:blocapiapp/src/screen/account.dart';
 import 'package:blocapiapp/src/screen/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('More'),
-        backgroundColor: Colors.teal,
+        backgroundColor: defaultAppbarColor,
         centerTitle: true,
       ),
       body: Container(
@@ -41,25 +41,6 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
               Divider(
                 color: Colors.grey[300],
               ),
-             /* InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AccountPage()));
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                  child: Text(
-                    'Pengaturan akun',
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                color: Colors.grey[300],
-              ),*/
               InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage() ));
@@ -123,7 +104,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
             FlatButton(
               child: Text(
                   'Batal',
-                style: TextStyle(color: Colors.teal)
+                style: TextStyle(color: defaultAppbarColor)
               ),
               onPressed: () {
                 print('cancel clicked');
@@ -133,7 +114,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
             FlatButton(
               child: Text(
                   'Keluar',
-                  style: TextStyle(color: Colors.teal)
+                  style: TextStyle(color: defaultAppbarColor)
               ),
               onPressed: () {
                 print('logout clicked');

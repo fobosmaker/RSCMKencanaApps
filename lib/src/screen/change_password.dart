@@ -1,3 +1,4 @@
+import 'package:blocapiapp/constant.dart';
 import 'package:flutter/material.dart';
 class ChangePasswordPage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text('Ubah Password'),
-        backgroundColor: Colors.teal,
+        backgroundColor: defaultAppbarColor,
         centerTitle: true,
         actions: <Widget>[
           InkWell(
@@ -25,15 +26,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             },
             child: Icon(
               Icons.send,
-              color: Colors.white,
+              color: defaultAppbarContentColor,
             ),
           ),
           SizedBox(width: 15)
-
         ],
       ),
       body: Container(
-        //padding: EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
