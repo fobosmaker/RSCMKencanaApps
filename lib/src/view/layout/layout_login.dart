@@ -88,12 +88,12 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 40,),
+              SizedBox(height: 50,),
               Center(
                 //padding: const EdgeInsets.all(20),
                 child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
               ),
-              SizedBox(height: 40,),
+              SizedBox(height: 50,),
               /*Padding(
                 padding: const EdgeInsets.all(20),
                 child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
