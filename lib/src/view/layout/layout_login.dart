@@ -88,18 +88,24 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20),
+              SizedBox(height: 40,),
+              Center(
+                //padding: const EdgeInsets.all(20),
                 child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
               ),
-              Padding(
+              SizedBox(height: 40,),
+              /*Padding(
+                padding: const EdgeInsets.all(20),
+                child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
+              ),*/
+              /*Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text('Login',style: TextStyle(fontSize: 35, color: Colors.white, fontWeight: FontWeight.w400,letterSpacing: 0.5), textAlign: TextAlign.end,),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Text('Selamat datang di Aplikasi Pasien',style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.end,),
-              ),
+              ),*/
              /* Container(
                 height: 300,
                 decoration: BoxDecoration(
