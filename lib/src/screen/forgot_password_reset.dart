@@ -48,7 +48,7 @@ class _ForgotPasswordResetPageState extends State<ForgotPasswordResetPage> {
                           ListTile(
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               title: Text(
-                                  "Password baru",
+                                  "Password Baru",
                                   style: TextStyle(
                                       color: defaultAppbarColor,
                                       fontSize: 13,
@@ -64,7 +64,7 @@ class _ForgotPasswordResetPageState extends State<ForgotPasswordResetPage> {
                           ListTile(
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               title: Text(
-                                  "Konfirmasi password baru",
+                                  "Konfirmasi Password Baru",
                                   style: TextStyle(
                                       color: defaultAppbarColor,
                                       fontSize: 13,

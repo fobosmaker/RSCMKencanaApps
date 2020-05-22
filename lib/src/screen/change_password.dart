@@ -1,4 +1,5 @@
 import 'package:blocapiapp/constant.dart';
+import 'package:blocapiapp/src/screen/login.dart';
 import 'package:flutter/material.dart';
 class ChangePasswordPage extends StatefulWidget {
   @override
@@ -14,97 +15,116 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Ubah Password'),
         backgroundColor: defaultAppbarColor,
-        centerTitle: true,
-        actions: <Widget>[
-          InkWell(
-            onTap: (){
-              print('${oldPass.text} ${newPass.text} ${confirmPass.text}');
-            },
-            child: Icon(
-              Icons.send,
-              color: defaultAppbarContentColor,
-            ),
-          ),
-          SizedBox(width: 15)
-        ],
+        elevation: 0,
       ),
       body: Container(
-        child: ListView(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-          ListTile(
-            contentPadding: EdgeInsets.fromLTRB(15,20,15,0),
-            title: Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
-                child: Text('Tips', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w700))
-            ),
-            subtitle: Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-              child: Text('Gunakan kombinasi huruf, angka dan tanda baca agar passwordmu sulit ditebak', style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300),),
-            ),
+        decoration: BoxDecoration(
+            color: defaultAppbarColor
+        ),
+        child:  SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: Text('Gunakan kombinasi huruf, angka dan tanda baca agar passwordmu sulit ditebak.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+              ),
+              SizedBox(height: 20,),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
+                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[50],
+                      ),
+                      margin: EdgeInsets.only(left: 40, top: 40, right: 40),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          ListTile(
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              title: Text(
+                                  "Password Lama",
+                                  style: TextStyle(
+                                      color: defaultAppbarColor,
+                                      fontSize: 13,
+                                      letterSpacing: 0.5
+                                  )
+                              ),
+                              subtitle: TextField(
+                                obscureText: true,
+                                //controller: newPass,
+                                maxLines: 1,
+                              )
+                          ),
+                          ListTile(
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              title: Text(
+                                  "Password Baru",
+                                  style: TextStyle(
+                                      color: defaultAppbarColor,
+                                      fontSize: 13,
+                                      letterSpacing: 0.5
+                                  )
+                              ),
+                              subtitle: TextField(
+                                obscureText: true,
+                                //controller: newPass,
+                                maxLines: 1,
+                              )
+                          ),
+                          ListTile(
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              title: Text(
+                                  "Konfirmasi Password Baru",
+                                  style: TextStyle(
+                                      color: defaultAppbarColor,
+                                      fontSize: 13,
+                                      letterSpacing: 0.5
+                                  )
+                              ),
+                              subtitle: TextField(
+                                obscureText: true,
+                                //controller: newPass,
+                                maxLines: 1,
+                              )
+                          ),
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: defaultAppbarColor,
+                                  borderRadius: BorderRadius.circular(25)
+                              ),
+                              child: Text(
+                                'Ubah',
+                                style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                  ),
+                ),
+              ),
+            ],
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            padding: EdgeInsets.only(top: 10, bottom: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-              ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                title: Text(
-                    "Password lama",
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 13
-                    )
-                ),
-                subtitle: TextField(
-                  obscureText: true,
-                  controller: oldPass,
-                  maxLines: 1,
-                  )
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                title: Text(
-                  "Password baru",
-                  style: TextStyle(
-                    color: Colors.teal,
-                    fontSize: 13
-                  )
-                ),
-                subtitle: TextField(
-                  obscureText: true,
-                  controller: newPass,
-                  maxLines: 1,
-                  )
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                title: Text("Konfirmasi password baru",
-                  style: TextStyle(
-                  color: Colors.teal,
-                  fontSize: 13)
-                ),
-                subtitle: TextField(
-                  obscureText: true,
-                  controller: confirmPass,
-                  maxLines: 1,
-                  )
-                )
-              ],
-              )
-            )
-          ],
         ),
       ),
     );
