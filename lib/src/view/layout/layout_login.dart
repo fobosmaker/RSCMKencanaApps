@@ -1,8 +1,8 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/bloc/user_bloc.dart';
+import 'package:blocapiapp/src/screen/forgot_password.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/verification.dart';
-import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/form_login.dart';
 import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,51 +68,18 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          //add gradasi
-          /*gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.teal,
-                Colors.teal[400],
-                Colors.teal[300],
-                Colors.teal[200],
-                Colors.teal[100],
-              ]
-          ),*/
           color: defaultAppbarColor
         ),
         child:  SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(height: 50,),
               Center(
-                //padding: const EdgeInsets.all(20),
                 child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
               ),
               SizedBox(height: 50,),
-              /*Padding(
-                padding: const EdgeInsets.all(20),
-                child: Image(image: AssetImage('assets/rscm_kencana_logo.jpg'),width: 200, height: 100, alignment: Alignment.centerLeft),
-              ),*/
-              /*Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text('Login',style: TextStyle(fontSize: 35, color: Colors.white, fontWeight: FontWeight.w400,letterSpacing: 0.5), textAlign: TextAlign.end,),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text('Selamat datang di Aplikasi Pasien',style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.end,),
-              ),*/
-             /* Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/rscm_kencana.jpg'),fit: BoxFit.fill),
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40))
-                ),
-              ),*/
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -125,8 +92,6 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                         color: Colors.grey[50],
                       ),
                       margin: EdgeInsets.only(left: 40, top: 40, right: 40),
-                      //padding: EdgeInsets.only(top: 10, bottom: 20),
-                      //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -163,7 +128,7 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                           ),
                           ListTile(
                             onTap: (){
-                              print('lupa password click');
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage() ));
                             },
                             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             leading: Icon(Icons.security),
@@ -248,90 +213,9 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                   ),
                 ),
               ),
-
-              /*Expanded(
-                flex: 1,
-                child: ClipPath(
-                  clipper: MyClipper(),
-                  child: Container(
-                    //width: double.infinity,
-                    decoration: BoxDecoration(
-
-                      //add gradasi
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              //Colors.teal[200],
-                              Colors.teal[100],
-                              Colors.white
-                            ]
-                        ),
-
-                        image: DecorationImage(image: AssetImage('assets/rscm_kencana.jpg'))
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: WidgetLogo(),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: WidgetFormLogin(),
-                ),
-              ),*/
             ],
           ),
         ),
-
-      /*SafeArea(
-        child:
-
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  //width: double.infinity,
-                  decoration: BoxDecoration(
-
-                    //add gradasi
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        //Colors.teal[200],
-                        Colors.teal[100],
-                        Colors.white
-                      ]
-                    ),
-
-                    image: DecorationImage(image: AssetImage('assets/rscm_kencana.jpg'))
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: WidgetLogo(),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                child: WidgetFormLogin(),
-              ),
-            ),
-          ],
-        ),
-      ),*/
     );
   }
 }
@@ -351,5 +235,4 @@ class MyClipper extends CustomClipper<Path>{
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return false;
   }
-
 }

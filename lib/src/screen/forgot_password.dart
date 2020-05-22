@@ -1,18 +1,18 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/register.dart';
+import 'package:blocapiapp/src/screen/forgot_password_reset.dart';
 import 'package:flutter/material.dart';
-class VerificationPage extends StatefulWidget {
+class ForgotPasswordPage extends StatefulWidget {
   @override
-  _VerificationPageState createState() => _VerificationPageState();
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
 }
 
-class _VerificationPageState extends State<VerificationPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Verifikasi'),
+        title: Text('Lupa Password'),
         backgroundColor: defaultAppbarColor,
         elevation: 0,
       ),
@@ -27,7 +27,7 @@ class _VerificationPageState extends State<VerificationPage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text('Sebelum anda melakukan registrasi, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami untuk memastikan anda merupakan pasien dari RSCM Kencana',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+                child: Text('Sebelum anda melakukan reset password, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
               ),
               SizedBox(height: 20,),
               Expanded(
@@ -61,25 +61,10 @@ class _VerificationPageState extends State<VerificationPage> {
                                 maxLines: 1,
                               )
                           ),
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text("Tanggal Lahir",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: confirmPass,
-                                maxLines: 1,
-                              )
-                          ),
                           InkWell(
                             onTap: (){
                               setState(() {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordResetPage()));
                               });
                             },
                             child: Container(
@@ -90,7 +75,7 @@ class _VerificationPageState extends State<VerificationPage> {
                                   borderRadius: BorderRadius.circular(25)
                               ),
                               child: Text(
-                                'Verifikasi',
+                                'Submit',
                                 style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
                                 textAlign: TextAlign.center,
                               ),

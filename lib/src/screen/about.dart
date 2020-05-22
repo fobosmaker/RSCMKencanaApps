@@ -23,22 +23,26 @@ class _AboutPageState extends State<AboutPage> {
                   Navigator.pop(context);
               },
             ),
-            expandedHeight: 200,
+            //expandedHeight: 200,
             centerTitle: true,
             //title on appbar
             title: Text('Tentang RSCM Kencana', style: TextStyle(color: defaultAppbarContentColor),),
-            flexibleSpace: FlexibleSpaceBar(
+            /*flexibleSpace: FlexibleSpaceBar(
               background: Image(
-                image: AssetImage('assets/medical-billing-illustration.png'),
+                image: AssetImage('assets/rscm_kencana.jpg'),
                 fit: BoxFit.cover,
               ),
-            ),
+            ),*/
           ),
           SliverList(
             delegate: SliverChildListDelegate([
+              Container(
+                child: Image(image: AssetImage('assets/rscm_kencana.jpg')),
+              ),
+              SizedBox(height: 10),
               Card(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  //padding: EdgeInsets.symmetric(vertical: 20),
                   child: ExpansionTile(
                     title: Text('Sejarah',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700, color: Colors.teal)),
                     children: <Widget>[
@@ -115,6 +119,7 @@ class _AboutPageState extends State<AboutPage> {
                     ],
                   )
               ),
+              SizedBox(height: 10),
             ]),
           ),
         ],
