@@ -193,7 +193,7 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                           InkWell(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPage()));
-                            },
+                              },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 20),
                               padding: EdgeInsets.all(20),

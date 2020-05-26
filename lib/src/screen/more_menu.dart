@@ -1,6 +1,8 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/about.dart';
+import 'package:blocapiapp/src/screen/login.dart';
 import 'package:blocapiapp/src/screen/profile.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class MoreMenuPage extends StatefulWidget {
@@ -9,6 +11,26 @@ class MoreMenuPage extends StatefulWidget {
 }
 
 class _MoreMenuPageState extends State<MoreMenuPage> {
+
+  @override
+  void initState() {
+    print('initState: run ${this.context}');
+
+    //check user session
+    MySharedPreferences sp = MySharedPreferences(context: this.context);
+    sp.getBool().then((val){
+      //if there is no session
+      if(!val){
+        //move to login
+        setState(() {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage() ));
+        });
+      }
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

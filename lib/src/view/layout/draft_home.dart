@@ -9,13 +9,22 @@ import 'package:blocapiapp/src/view/widget/circle_button_menu_home.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 class VerticalLayoutDraftHome extends StatefulWidget {
+
   @override
   _VerticalLayoutDraftHomeState createState() => _VerticalLayoutDraftHomeState();
+
 }
 
 class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('build view');
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
