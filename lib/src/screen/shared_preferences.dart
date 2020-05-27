@@ -19,6 +19,7 @@ class _SharedPreferencesPagesState extends State<SharedPreferencesPages> {
       //if there is no session
       if(!val){
         //move to login
+        print('sp run');
         setState(() {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage() ));
         });

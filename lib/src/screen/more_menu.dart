@@ -17,7 +17,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
     print('initState: run ${this.context}');
 
     //check user session
-    MySharedPreferences sp = MySharedPreferences(context: this.context);
+   /* MySharedPreferences sp = MySharedPreferences(context: this.context);
     sp.getBool().then((val){
       //if there is no session
       if(!val){
@@ -26,7 +26,7 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage() ));
         });
       }
-    });
+    });*/
 
     super.initState();
   }

@@ -2,12 +2,19 @@ import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
 import 'package:flutter/material.dart';
+
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final _formRegistration = GlobalKey<FormState>();
+  final username = TextEditingController();
+  final password = TextEditingController();
+  final confirmPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,76 +74,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: Text('Selangkah lagi untuk mendapatkan akunmu. Silahkan input password dengan menggunakan kombinasi huruf, angka dan tanda baca agar passwordmu sulit ditebak.,',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+                  child: Text('Selangkah lagi untuk mendapatkan akunmu. Silahkan input username untuk login, password dengan menggunakan kombinasi huruf dan angka agar passwordmu sulit ditebak.,',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
                 ),
-                /*Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[50],
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
-                  ),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[50],
-                      ),
-                      margin: EdgeInsets.only(left: 40, top: 40, right: 40),
-                      //padding: EdgeInsets.only(top: 10, bottom: 20),
-                      //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Password",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13
-                                  )
-                              ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
-                                maxLines: 1,
-                              )
-                          ),
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text("Konfirmasi password",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13)
-                              ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: confirmPass,
-                                maxLines: 1,
-                              )
-                          ),
-                          InkWell(
-                            onTap: (){
-                              setState(() {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                              });
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  color: defaultAppbarColor,
-                                  borderRadius: BorderRadius.circular(25)
-                              ),
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                  ),
-                ),*/
               ]),
             ),
           ];
@@ -146,69 +85,96 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Colors.grey[50],
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
             ),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey[50],
-                ),
-                margin: EdgeInsets.only(left: 40, top: 40, right: 40),
-                //padding: EdgeInsets.only(top: 10, bottom: 20),
-                //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  children: <Widget>[
-                    ListTile(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        title: Text(
-                            "Password",
-                            style: TextStyle(
-                                color: defaultAppbarColor,
-                                fontSize: 13
-                            )
-                        ),
-                        subtitle: TextField(
-                          obscureText: true,
-                          //controller: newPass,
-                          maxLines: 1,
-                        )
-                    ),
-                    ListTile(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        title: Text("Konfirmasi Password",
-                            style: TextStyle(
-                                color: defaultAppbarColor,
-                                fontSize: 13)
-                        ),
-                        subtitle: TextField(
-                          obscureText: true,
-                          //controller: confirmPass,
-                          maxLines: 1,
-                        )
-                    ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
+            padding: EdgeInsets.only(left: 40, top: 20, right: 40),
+            child: Form(
+              key: _formRegistration,
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      title: Text(
+                          "Username",
+                          style: TextStyle(
+                              color: defaultAppbarColor,
+                              fontSize: 13
+                          )
+                      ),
+                      subtitle: TextFormField(
+                        maxLines: 1,
+                        controller: username,
+                        validator: (value) {
+                          if (value.isEmpty) return 'Username medik tidak boleh kosong!';
+                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                          return null;
+                        },
+                      )
+                  ),
+                  ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      title: Text(
+                          "Password",
+                          style: TextStyle(
+                              color: defaultAppbarColor,
+                              fontSize: 13
+                          )
+                      ),
+                      subtitle: TextFormField(
+                        maxLines: 1,
+                        controller: password,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty) return 'Password tidak boleh kosong!';
+                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                          return null;
+                        },
+                      )
+                  ),
+                  ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      title: Text("Konfirmasi Password",
+                          style: TextStyle(
+                              color: defaultAppbarColor,
+                              fontSize: 13)
+                      ),
+                      subtitle: TextFormField(
+                        maxLines: 1,
+                        controller: confirmPassword,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty) return 'Konfirmasi password tidak boleh kosong!';
+                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                          return null;
+                        },
+                      )
+                  ),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        if(_formRegistration.currentState.validate()){
+                          print('valid');
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: defaultAppbarColor,
-                            borderRadius: BorderRadius.circular(25)
-                        ),
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
-                          textAlign: TextAlign.center,
-                        ),
+                        }
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: defaultAppbarColor,
+                          borderRadius: BorderRadius.circular(25)
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ],
-                )
-            ),
+                  ),
+                ],
+              ),
+            )
           ),
         ),
     );

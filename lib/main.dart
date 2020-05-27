@@ -1,5 +1,6 @@
 import 'package:blocapiapp/src/screen/about.dart';
 import 'package:blocapiapp/src/screen/billing.dart';
+import 'package:blocapiapp/src/screen/change_password.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/jadwal_dokter.dart';
@@ -20,7 +21,7 @@ void main() => runApp(MaterialApp(
     '/content': (context) => ContentEdukasiPage(),
     '/jadwal_dokter': (context) => JadwalDokterPage(),
     '/more': (context) => MoreMenuPage(),
-    '/profile': (context) => AboutPage(),
+    '/profile': (context) => ChangePasswordPage(),
     '/register': (context) => RegisterPage(),
   },
 ));

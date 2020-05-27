@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     print('initState: run ${this.context}');
-    SharedPreferencesPages().createState().checkBoolean();
+    //SharedPreferencesPages().createState().checkBoolean();
     //check user session
     /*MySharedPreferences sp = MySharedPreferences(context: this.context);
     sp.getBool().then((val){

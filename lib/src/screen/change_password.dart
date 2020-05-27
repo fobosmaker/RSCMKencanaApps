@@ -8,6 +8,7 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
+  final _formChangePassword = GlobalKey<FormState>();
   final oldPass = TextEditingController();
   final newPass = TextEditingController();
   final confirmPass = TextEditingController();
@@ -25,7 +26,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         decoration: BoxDecoration(
             color: defaultAppbarColor
         ),
-        child:  SafeArea(
+        child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,12 +42,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       color: Colors.grey[50],
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
                   ),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[50],
-                      ),
-                      margin: EdgeInsets.only(left: 40, top: 40, right: 40),
+                  padding: EdgeInsets.only(left: 40, top: 40, right: 40),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formChangePassword,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -60,10 +59,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                       letterSpacing: 0.5
                                   )
                               ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
+                              subtitle: TextFormField(
                                 maxLines: 1,
+                                controller: oldPass,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'Password lama tidak boleh kosong!';
+                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  return null;
+                                },
                               )
                           ),
                           ListTile(
@@ -76,10 +80,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                       letterSpacing: 0.5
                                   )
                               ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
+                              subtitle: TextFormField(
                                 maxLines: 1,
+                                controller: newPass,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'Password baru tidak boleh kosong!';
+                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  return null;
+                                },
                               )
                           ),
                           ListTile(
@@ -92,16 +101,24 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                       letterSpacing: 0.5
                                   )
                               ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
+                              subtitle: TextFormField(
                                 maxLines: 1,
+                                controller: confirmPass,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'Konfirmasi password baru tidak boleh kosong!';
+                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  return null;
+                                },
                               )
                           ),
                           InkWell(
                             onTap: (){
                               setState(() {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                if(_formChangePassword.currentState.validate()){
+                                  print('valid input ${oldPass.text} ${newPass.text} ${confirmPass.text} ');
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                }
                               });
                             },
                             child: Container(
@@ -119,8 +136,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             ),
                           )
                         ],
-                      )
-                  ),
+                      ),
+                    ),
+                  )
                 ),
               ),
             ],

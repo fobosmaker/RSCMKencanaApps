@@ -47,6 +47,7 @@ class VerticalLayoutLogin extends StatefulWidget {
 
 class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
 
+  final _formLogin = GlobalKey<FormState>();
   final userName = TextEditingController();
   final password = TextEditingController();
   bool isClick = false;
@@ -62,7 +63,6 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
     bloc.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,29 +86,32 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                       color: Colors.grey[50],
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
                   ),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[50],
-                      ),
-                      margin: EdgeInsets.only(left: 40, top: 40, right: 40),
+                  padding: EdgeInsets.all(40),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formLogin,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           ListTile(
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               title: Text(
-                                  "Email",
+                                  "Username",
                                   style: TextStyle(
                                       color: defaultAppbarColor,
                                       fontSize: 13,
-                                    letterSpacing: 0.5
+                                      letterSpacing: 0.5
                                   )
                               ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
+                              subtitle: TextFormField(
                                 maxLines: 1,
+                                controller: userName,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'Username tidak boleh kosong!';
+                                  //if (value.contains(new RegExp(r'[!#<>?":`~;[\]\\|=+)(*&^%\s]'),0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  return null;
+                                },
                               )
                           ),
                           ListTile(
@@ -120,10 +123,15 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                                       letterSpacing: 0.5
                                   )
                               ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: confirmPass,
+                              subtitle: TextFormField(
                                 maxLines: 1,
+                                obscureText: true,
+                                controller: password,
+                                validator: (value) {
+                                  if (value.isEmpty) return 'Password tidak boleh kosong!';
+                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
+                                  return null;
+                                },
                               )
                           ),
                           ListTile(
@@ -173,18 +181,22 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                           InkWell(
                             onTap: (){
                               setState(() {
-                                isClick = true;
+                                //check validasi
+                                if (_formLogin.currentState.validate()) {
+                                  print('form valid');
+                                  isClick = true;
+                                }
                               });
                             },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: defaultAppbarColor,
-                                borderRadius: BorderRadius.circular(25)
+                                  color: defaultAppbarColor,
+                                  borderRadius: BorderRadius.circular(25)
                               ),
                               child: Text(
-                                  'Login',
+                                'Login',
                                 style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
                                 textAlign: TextAlign.center,
                               ),
@@ -193,7 +205,7 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                           InkWell(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPage()));
-                              },
+                            },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 20),
                               padding: EdgeInsets.all(20),
@@ -209,7 +221,8 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                    )
                   ),
                 ),
               ),
@@ -217,22 +230,5 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
           ),
         ),
     );
-  }
-}
-
-class MyClipper extends CustomClipper<Path>{
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height-80);
-    path.quadraticBezierTo(size.width/2, size.height, size.width, size.height-80);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }
