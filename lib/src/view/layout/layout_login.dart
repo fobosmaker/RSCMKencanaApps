@@ -1,8 +1,8 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/bloc/user_bloc.dart';
-import 'package:blocapiapp/src/screen/forgot_password.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/verification.dart';
+import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:blocapiapp/src/view/widget/form_login.dart';
 import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/cupertino.dart';
@@ -93,50 +93,11 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Username",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextFormField(
-                                maxLines: 1,
-                                controller: userName,
-                                validator: (value) {
-                                  if (value.isEmpty) return 'Username tidak boleh kosong!';
-                                  //if (value.contains(new RegExp(r'[!#<>?":`~;[\]\\|=+)(*&^%\s]'),0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  return null;
-                                },
-                              )
-                          ),
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text("Password",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextFormField(
-                                maxLines: 1,
-                                obscureText: true,
-                                controller: password,
-                                validator: (value) {
-                                  if (value.isEmpty) return 'Password tidak boleh kosong!';
-                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  return null;
-                                },
-                              )
-                          ),
+                          FormInputWidget(label: "Username", controller: userName, isPassword: false),
+                          FormInputWidget(label: "Password", controller: password, isPassword: true),
                           ListTile(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage() ));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPage(flag: 0)));
                             },
                             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             leading: Icon(Icons.security),
@@ -183,7 +144,6 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                               setState(() {
                                 //check validasi
                                 if (_formLogin.currentState.validate()) {
-                                  print('form valid');
                                   isClick = true;
                                 }
                               });
@@ -204,7 +164,7 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                           ),
                           InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPage(flag: 1)));
                             },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 20),

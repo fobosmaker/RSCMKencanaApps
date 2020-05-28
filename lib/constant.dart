@@ -3,5 +3,6 @@ import 'package:flutter/material.dart';
 //Colors
 const defaultAppbarColor = Colors.teal;
 const defaultAppbarContentColor = Colors.white;
-RegExp defaultRegex =  RegExp(r'[!#<>?":`~;[\]\\|=+)(*&^%\s]');
 
+//Regex default for filter input
+RegExp defaultRegex =  RegExp(r'[!#<>?":`~;[\]\\|=+)(*&^%\s]');

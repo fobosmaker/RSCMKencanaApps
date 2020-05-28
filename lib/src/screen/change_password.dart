@@ -1,5 +1,6 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/login.dart';
+import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
 class ChangePasswordPage extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text('Gunakan kombinasi huruf, angka dan tanda baca agar passwordmu sulit ditebak.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+                child: Text('Gunakan kombinasi huruf dan angka agar passwordmu sulit ditebak.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
               ),
               SizedBox(height: 20,),
               Expanded(
@@ -49,69 +50,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Password Lama",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextFormField(
-                                maxLines: 1,
-                                controller: oldPass,
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value.isEmpty) return 'Password lama tidak boleh kosong!';
-                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  return null;
-                                },
-                              )
-                          ),
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Password Baru",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextFormField(
-                                maxLines: 1,
-                                controller: newPass,
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value.isEmpty) return 'Password baru tidak boleh kosong!';
-                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  return null;
-                                },
-                              )
-                          ),
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Konfirmasi Password Baru",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextFormField(
-                                maxLines: 1,
-                                controller: confirmPass,
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value.isEmpty) return 'Konfirmasi password baru tidak boleh kosong!';
-                                  if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                  return null;
-                                },
-                              )
-                          ),
+                          FormInputWidget(label: "Password Lama", controller: oldPass, isPassword: true),
+                          FormInputWidget(label: "Password Baru", controller: newPass, isPassword: true),
+                          FormInputWidget(label: "Konfirmasi Password Baru", controller: confirmPass, isPassword: true),
                           InkWell(
                             onTap: (){
                               setState(() {

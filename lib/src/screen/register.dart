@@ -1,5 +1,6 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/screen/home.dart';
+import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -92,68 +93,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      title: Text(
-                          "Username",
-                          style: TextStyle(
-                              color: defaultAppbarColor,
-                              fontSize: 13
-                          )
-                      ),
-                      subtitle: TextFormField(
-                        maxLines: 1,
-                        controller: username,
-                        validator: (value) {
-                          if (value.isEmpty) return 'Username medik tidak boleh kosong!';
-                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                          return null;
-                        },
-                      )
-                  ),
-                  ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      title: Text(
-                          "Password",
-                          style: TextStyle(
-                              color: defaultAppbarColor,
-                              fontSize: 13
-                          )
-                      ),
-                      subtitle: TextFormField(
-                        maxLines: 1,
-                        controller: password,
-                        obscureText: true,
-                        validator: (value) {
-                          if (value.isEmpty) return 'Password tidak boleh kosong!';
-                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                          return null;
-                        },
-                      )
-                  ),
-                  ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      title: Text("Konfirmasi Password",
-                          style: TextStyle(
-                              color: defaultAppbarColor,
-                              fontSize: 13)
-                      ),
-                      subtitle: TextFormField(
-                        maxLines: 1,
-                        controller: confirmPassword,
-                        obscureText: true,
-                        validator: (value) {
-                          if (value.isEmpty) return 'Konfirmasi password tidak boleh kosong!';
-                          if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                          return null;
-                        },
-                      )
-                  ),
+                  FormInputWidget(label: "Username", controller: username, isPassword: false),
+                  FormInputWidget(label: "Password", controller: password, isPassword: true),
+                  FormInputWidget(label: "Konfirmasi Password", controller: confirmPassword, isPassword: true),
                   InkWell(
                     onTap: (){
                       setState(() {
                         if(_formRegistration.currentState.validate()){
-                          print('valid');
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
                         }
                       });

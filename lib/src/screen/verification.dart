@@ -1,8 +1,20 @@
 import 'package:blocapiapp/constant.dart';
+import 'package:blocapiapp/src/screen/forgot_password.dart';
 import 'package:blocapiapp/src/screen/register.dart';
+import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
 
+/*
+  * flag digunakan untuk menentukan page mana selanjutnya ketika button verifikasi di klik. flag berupa integer
+  * flag = 0 ( forgot password reset )
+  * flag = 1 ( registrasi user)
+*/
+
 class VerificationPage extends StatefulWidget {
+
+  final int flag;
+  VerificationPage({this.flag});
+
   @override
   _VerificationPageState createState() => _VerificationPageState();
 }
@@ -33,9 +45,12 @@ class _VerificationPageState extends State<VerificationPage> {
             children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Text('Sebelum anda melakukan registrasi, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami untuk memastikan anda merupakan pasien dari RSCM Kencana',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+              child: widget.flag == 0 ?
+              Text('Sebelum anda mereset password, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami untuk memastikan anda merupakan pasien dari RSCM Kencana',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,)
+                  :
+              Text('Sebelum anda melakukan registrasi, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami untuk memastikan anda merupakan pasien dari RSCM Kencana',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -49,51 +64,14 @@ class _VerificationPageState extends State<VerificationPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        ListTile(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            title: Text(
-                                "Nomor Rekam Medik",
-                                style: TextStyle(
-                                    color: defaultAppbarColor,
-                                    fontSize: 13,
-                                    letterSpacing: 0.5
-                                )
-                            ),
-                            subtitle: TextFormField(
-                              maxLines: 1,
-                              controller: nomorRekamMedik,
-                              validator: (value) {
-                                if (value.isEmpty) return 'Nomor rekam medik tidak boleh kosong!';
-                                if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                return null;
-                              },
-                            )
-                        ),
-                        ListTile(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            title: Text("Tanggal Lahir",
-                                style: TextStyle(
-                                    color: defaultAppbarColor,
-                                    fontSize: 13,
-                                    letterSpacing: 0.5
-                                )
-                            ),
-                            subtitle: TextFormField(
-                              maxLines: 1,
-                              controller: tanggalLahir,
-                              validator: (value) {
-                                if (value.isEmpty) return 'Tanggal lahir tidak boleh kosong!';
-                                if (value.contains(defaultRegex,0)) return 'Terdapat karakter yang tidak diizinkan!';
-                                return null;
-                              },
-                            )
-                        ),
+                        FormInputWidget(label: "Nomor Rekam Medik", controller: nomorRekamMedik, isPassword: false),
+                        FormInputWidget(label: "Tanggal Lahir", controller: tanggalLahir, isPassword: false),
                         InkWell(
                           onTap: (){
                             setState(() {
                               if(_formVerification.currentState.validate()){
-                                print('valid');
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                                if(widget.flag == 0) Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordResetPage()));
+                                if(widget.flag == 1) Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
                               }
                             });
                           },

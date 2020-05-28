@@ -1,4 +1,3 @@
-import 'package:blocapiapp/src/screen/about.dart';
 import 'package:blocapiapp/src/screen/billing.dart';
 import 'package:blocapiapp/src/screen/change_password.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
@@ -12,16 +11,17 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  initialRoute: '/',
+  initialRoute: '/home',
   routes: {
-    '/': (context) => SplashScreenPage(),
-    '/login': (context) => LoginPage(),
+    '/splash': (context) => SplashScreenPage(),
+    '/home': (context) => HomePage(),
+/*    '/login': (context) => LoginPage(),
     '/home': (context) => HomePage(),
     '/billing': (context) => BillingPage(),
     '/content': (context) => ContentEdukasiPage(),
     '/jadwal_dokter': (context) => JadwalDokterPage(),
     '/more': (context) => MoreMenuPage(),
     '/profile': (context) => ChangePasswordPage(),
-    '/register': (context) => RegisterPage(),
+    '/register': (context) => RegisterPage(),*/
   },
 ));

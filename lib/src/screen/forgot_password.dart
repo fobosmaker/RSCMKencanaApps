@@ -1,18 +1,24 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/forgot_password_reset.dart';
+import 'package:blocapiapp/src/screen/login.dart';
+import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
-class ForgotPasswordPage extends StatefulWidget {
+class ForgotPasswordResetPage extends StatefulWidget {
   @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
+  _ForgotPasswordResetPageState createState() => _ForgotPasswordResetPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class _ForgotPasswordResetPageState extends State<ForgotPasswordResetPage> {
+
+  final _formResetPassword = GlobalKey<FormState>();
+  final newPassword = TextEditingController();
+  final confirmNewPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Lupa Password'),
+        title: Text('Reset Password'),
         backgroundColor: defaultAppbarColor,
         elevation: 0,
       ),
@@ -27,7 +33,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text('Sebelum anda melakukan reset password, kami akan melakukan verifikasi data nomor rekam medik anda kedalam sistem kami.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
+                child: Text('Silahkan reset password anda untuk mengembalikan akses kedalam akun anda.',style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5), textAlign: TextAlign.center,),
               ),
               SizedBox(height: 20,),
               Expanded(
@@ -36,35 +42,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       color: Colors.grey[50],
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))
                   ),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[50],
-                      ),
-                      margin: EdgeInsets.only(left: 40, top: 40, right: 40),
+                  padding: EdgeInsets.only(left: 40, top: 40, right: 40),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formResetPassword,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              title: Text(
-                                  "Nomor Rekam Medik",
-                                  style: TextStyle(
-                                      color: defaultAppbarColor,
-                                      fontSize: 13,
-                                      letterSpacing: 0.5
-                                  )
-                              ),
-                              subtitle: TextField(
-                                obscureText: true,
-                                //controller: newPass,
-                                maxLines: 1,
-                              )
-                          ),
+                          FormInputWidget(label: "Password Baru", controller: newPassword, isPassword: true),
+                          FormInputWidget(label: "Konfirmasi Password Baru", controller: confirmNewPassword, isPassword: true),
                           InkWell(
                             onTap: (){
                               setState(() {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordResetPage()));
+                                if(_formResetPassword.currentState.validate()){
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                }
                               });
                             },
                             child: Container(
@@ -75,33 +67,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   borderRadius: BorderRadius.circular(25)
                               ),
                               child: Text(
-                                'Submit',
+                                'Reset',
                                 style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 20),
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(25)
-                              ),
-                              child: Text(
-                                'Kembali',
-                                style: TextStyle(color: defaultAppbarColor, letterSpacing: 0.5, fontWeight: FontWeight.w300),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                           )
                         ],
-                      )
-                  ),
+                      ),
+                    ),
+                  )
                 ),
               ),
             ],
