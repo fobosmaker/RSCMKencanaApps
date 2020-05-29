@@ -1,5 +1,5 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/change_password.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+
+    //check user session
+    new MySharedPreferences(context: context).checkBoolean();
+
+    //if user login
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -39,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 trailing : FlatButton.icon(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordPage() ));
+                      Navigator.pushNamed(context,'/change_password');
                     },
                     icon: Icon(Icons.edit),
                     label: Text('Ubah')

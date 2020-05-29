@@ -1,35 +1,5 @@
-import 'package:blocapiapp/src/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class SharedPreferencesPages extends StatefulWidget {
-  @override
-  _SharedPreferencesPagesState createState() => _SharedPreferencesPagesState();
-}
-
-class _SharedPreferencesPagesState extends State<SharedPreferencesPages> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-
-  void checkBoolean(){
-    MySharedPreferences sp = MySharedPreferences(context: this.context);
-    sp.getBool().then((val){
-      //if there is no session
-      if(!val){
-        //move to login
-        print('sp run');
-        setState(() {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage() ));
-        });
-      }
-    });
-  }
-}
-
-
-
 
 class MySharedPreferences{
   String myStringKey = 'key_my_string';
@@ -38,7 +8,7 @@ class MySharedPreferences{
 
   MySharedPreferences({this.context});
 
-  void saveData(String string, bool bool) async {
+  Future<void> saveData(String string, bool bool) async {
     print('MySharedPreferences: saveData run');
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString(myStringKey, string);
@@ -48,7 +18,9 @@ class MySharedPreferences{
   Future<bool> getBool() async {
     print('MySharedPreferences: getBool run');
     SharedPreferences pref = await SharedPreferences.getInstance();
+    print('MySharedPreferences: getBool : ${pref.getBool(myBoolKey)}');
     return pref.getBool(myBoolKey) ?? false;
+    //return true;
   }
 
   Future<String> getString() async {
@@ -60,5 +32,18 @@ class MySharedPreferences{
     print('MySharedPreferences: clearData run');
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
+  }
+
+  void checkBoolean(){
+    print('MySharedPreferences: checkboolean run');
+    MySharedPreferences sp = MySharedPreferences(context: this.context);
+    sp.getBool().then((val){
+      //if there is no session
+      if(!val){
+        //move to login
+        print('MySharedPreferences: checkboolean $val');
+        Navigator.pushReplacementNamed(context, '/login');
+      }
+    });
   }
 }

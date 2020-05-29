@@ -1,5 +1,6 @@
-import 'package:blocapiapp/src/screen/login.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:flutter/material.dart';
+
 class SplashScreenPage extends StatefulWidget {
   @override
   _SplashScreenPageState createState() => _SplashScreenPageState();
@@ -9,10 +10,22 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   void initState() {
+
+    // 3s over, navigate to a new page
     Future.delayed(Duration(seconds: 3), () {
-      // 3s over, navigate to a new page
-      Navigator.pushReplacement(context, MaterialPageRoute( builder: (context) => LoginPage() ));
+      //cek if user is login or not
+      MySharedPreferences sp = MySharedPreferences(context: this.context);
+      sp.getBool().then((val){
+        print('login: $val');
+      //if there is no session
+      if(!val){
+        //move to login
+        Navigator.pushReplacementNamed(context, '/login');
+      }
+      else Navigator.pushReplacementNamed(context, '/home');
+      });
     });
+
     super.initState();
   }
 

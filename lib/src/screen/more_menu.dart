@@ -1,10 +1,8 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/about.dart';
-import 'package:blocapiapp/src/screen/login.dart';
-import 'package:blocapiapp/src/screen/profile.dart';
 import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class MoreMenuPage extends StatefulWidget {
   @override
   _MoreMenuPageState createState() => _MoreMenuPageState();
@@ -12,99 +10,93 @@ class MoreMenuPage extends StatefulWidget {
 
 class _MoreMenuPageState extends State<MoreMenuPage> {
 
+  MySharedPreferences sp;
+
   @override
   void initState() {
-    print('initState: run ${this.context}');
-
-    //check user session
-   /* MySharedPreferences sp = MySharedPreferences(context: this.context);
-    sp.getBool().then((val){
-      //if there is no session
-      if(!val){
-        //move to login
-        setState(() {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage() ));
-        });
-      }
-    });*/
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    //cek session first
+    sp = MySharedPreferences(context: this.context);
+    sp.checkBoolean();
+
+    //if user login
     return Scaffold(
-      appBar: AppBar(
-        title: Text('More'),
-        backgroundColor: defaultAppbarColor,
-        centerTitle: true,
-      ),
-      body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                  child: Text(
-                    'Profil pasien',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w300,
-                      letterSpacing: 0.5
+        appBar: AppBar(
+          title: Text('More'),
+          backgroundColor: defaultAppbarColor,
+          centerTitle: true,
+        ),
+        body: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context,'/profile');
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    child: Text(
+                      'Profil pasien',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: 0.5
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Divider(
-                color: Colors.grey[300],
-              ),
-              InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage() ));
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                  child: Text(
-                    'Tentang RSCM Kencana',
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5
+                Divider(
+                  color: Colors.grey[300],
+                ),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/about');
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    child: Text(
+                      'Tentang RSCM Kencana',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: 0.5
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Divider(
-                color: Colors.grey[300],
-              ),
-              InkWell(
-                onTap: (){
-                  print('Logout click');
-                  _showMyDialog();
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                  child: Text(
-                    'Keluar',
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5
+                Divider(
+                  color: Colors.grey[300],
+                ),
+                InkWell(
+                  onTap: (){
+                    print('Logout click');
+                    _showMyDialog();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    child: Text(
+                      'Keluar',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: 0.5
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Divider(
-                color: Colors.grey[300],
-              ),
-            ],
-          )
-      )
+                Divider(
+                  color: Colors.grey[300],
+                ),
+              ],
+            )
+        )
     );
   }
 
@@ -140,7 +132,8 @@ class _MoreMenuPageState extends State<MoreMenuPage> {
               ),
               onPressed: () {
                 print('logout clicked');
-                Navigator.of(context).pop();
+                sp.clearData();
+                Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
               },
             ),
           ],

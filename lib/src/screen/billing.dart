@@ -1,6 +1,7 @@
 import 'package:blocapiapp/src/bloc/billing_bloc.dart';
 import 'package:blocapiapp/src/screen/page_500.dart';
 import 'package:blocapiapp/src/screen/page_no_data.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/layout/draft_home.dart';
 import 'package:blocapiapp/src/view/layout/draft_layout_billing.dart';
 import 'package:blocapiapp/src/view/layout/layout_billing.dart';
@@ -25,14 +26,19 @@ class _BillingPageState extends State<BillingPage> {
     bloc.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
+
+    //check user session
+    new MySharedPreferences(context: context).checkBoolean();
+
+    //if user login
     return Scaffold(
-      body: //VerticalLayoutDraftHome(),
-      StreamBuilder(
-          initialData: bloc.fetchDataBilling("1190155"),
-          stream: bloc.dataBilling,
-          builder: (context,AsyncSnapshot snapshot){
+      body: StreamBuilder(
+        initialData: bloc.fetchDataBilling("1190155"),
+        stream: bloc.dataBilling,
+        builder: (context,AsyncSnapshot snapshot){
           if(snapshot.connectionState == ConnectionState.active){
 
             //if error come from API
@@ -51,6 +57,7 @@ class _BillingPageState extends State<BillingPage> {
           return Center(child: CircularProgressIndicator());
         }),
     );
+
   }
 
   Widget generateWidget(data){

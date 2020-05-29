@@ -1,5 +1,5 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/login.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
 class ChangePasswordPage extends StatefulWidget {
@@ -16,6 +16,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //check user session
+    MySharedPreferences sp = MySharedPreferences(context: this.context);
+    sp.checkBoolean();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -58,7 +63,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               setState(() {
                                 if(_formChangePassword.currentState.validate()){
                                   print('valid input ${oldPass.text} ${newPass.text} ${confirmPass.text} ');
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                  sp.clearData();
+                                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                                 }
                               });
                             },

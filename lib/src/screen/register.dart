@@ -1,5 +1,5 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/home.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:blocapiapp/src/view/widget/list_tile_profile.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +28,8 @@ class _RegisterPageState extends State<RegisterPage> {
               floating: false,
               snap: false,
               pinned: true,
-              //set icon on left side
-              leading: Container(),
-              //expandedHeight: 200,
               centerTitle: true,
-              //title on appbar
-              title: Text('Registrasi'),
+              title: Text('Registrasi'), //title on appbar
             ),
             SliverList(
               delegate: SliverChildListDelegate([
@@ -98,11 +94,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   FormInputWidget(label: "Konfirmasi Password", controller: confirmPassword, isPassword: true),
                   InkWell(
                     onTap: (){
-                      setState(() {
-                        if(_formRegistration.currentState.validate()){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                        }
-                      });
+                      if(_formRegistration.currentState.validate()){
+                        MySharedPreferences sp = MySharedPreferences(context: this.context);
+                        sp.saveData('yeay', true);
+                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                      }
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

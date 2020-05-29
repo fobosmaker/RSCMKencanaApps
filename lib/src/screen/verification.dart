@@ -1,6 +1,4 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/forgot_password.dart';
-import 'package:blocapiapp/src/screen/register.dart';
 import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
 
@@ -70,8 +68,8 @@ class _VerificationPageState extends State<VerificationPage> {
                           onTap: (){
                             setState(() {
                               if(_formVerification.currentState.validate()){
-                                if(widget.flag == 0) Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordResetPage()));
-                                if(widget.flag == 1) Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                                if(widget.flag == 0) Navigator.pushNamed(context,'/forgot_password');
+                                if(widget.flag == 1) Navigator.pushNamed(context,'/registration');
                               }
                             });
                           },

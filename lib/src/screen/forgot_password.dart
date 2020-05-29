@@ -1,5 +1,4 @@
 import 'package:blocapiapp/constant.dart';
-import 'package:blocapiapp/src/screen/login.dart';
 import 'package:blocapiapp/src/view/widget/form_input.dart';
 import 'package:flutter/material.dart';
 class ForgotPasswordResetPage extends StatefulWidget {
@@ -53,11 +52,9 @@ class _ForgotPasswordResetPageState extends State<ForgotPasswordResetPage> {
                           FormInputWidget(label: "Konfirmasi Password Baru", controller: confirmNewPassword, isPassword: true),
                           InkWell(
                             onTap: (){
-                              setState(() {
-                                if(_formResetPassword.currentState.validate()){
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                                }
-                              });
+                              if(_formResetPassword.currentState.validate()){
+                                Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                              }
                             },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

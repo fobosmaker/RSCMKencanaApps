@@ -1,4 +1,5 @@
 import 'package:blocapiapp/constant.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -60,14 +61,15 @@ class _Example01Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new InkWell(
-            child: Container(
+          child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: backgroundColor,
-              image: DecorationImage(
-                  image: AssetImage(imageUrl),
-                  fit: BoxFit.fitWidth)
+          borderRadius: BorderRadius.circular(5),
+          color: backgroundColor,
+          image: DecorationImage(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.fitWidth
           )
+        )
       ),
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedImage(imageURL: imageUrl)));
@@ -79,6 +81,11 @@ class _Example01Tile extends StatelessWidget {
 class _ContentEdukasiPageState extends State<ContentEdukasiPage> {
   @override
   Widget build(BuildContext context) {
+
+    //check user session
+    new MySharedPreferences(context: context).checkBoolean();
+
+    //if user login
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -87,14 +94,16 @@ class _ContentEdukasiPageState extends State<ContentEdukasiPage> {
       ),
       body:
       new Padding(
-          padding: const EdgeInsets.only(top: 4.0),
-          child: new StaggeredGridView.count(
-            crossAxisCount: 4,
-            staggeredTiles: _myStaggeredTiles,
-            children: _tiles,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-            padding: const EdgeInsets.all(4.0),
-          )));
+        padding: const EdgeInsets.only(top: 4.0),
+        child: new StaggeredGridView.count(
+          crossAxisCount: 4,
+          staggeredTiles: _myStaggeredTiles,
+          children: _tiles,
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
+          padding: const EdgeInsets.all(4.0),
+        )
+      )
+    );
   }
 }

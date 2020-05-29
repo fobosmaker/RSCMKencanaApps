@@ -1,4 +1,5 @@
 import 'package:blocapiapp/constant.dart';
+import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:flutter/material.dart';
 class AboutPage extends StatefulWidget {
   @override
@@ -8,6 +9,10 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
+
+    //check user session
+    new MySharedPreferences(context: context).checkBoolean();
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
