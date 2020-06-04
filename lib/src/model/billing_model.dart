@@ -7,7 +7,7 @@ class BillingModel{
   BillingDataModel data;
   BillingModel({this.statusCode, this.message,this.data});
 
-  BillingDataModel convertData(var data){
+  /*BillingDataModel convertData(var data){
     List<dynamic> tab = data['tab'];
     List<TabModel> listTab = [];
     for(int i = 0; i < tab.length; i++){
@@ -22,8 +22,8 @@ class BillingModel{
       print('item desc: ${row['org_nm']} with total row = ${listDetail.length}');
       listTab.add(TabModel(id: row['org_id'], content: row['org_nm'], total: row['total'], data:listDetail ));
     }
-    return BillingDataModel(totalSummary: data['totalSummary'],totalDeposit: data['totalDeposit'], totalTagihan: data['totalTagihan'],tab: listTab);
-  }
+    return BillingDataModel(totalSummary: data['totalSummary'],totalDeposit: data['totalDeposit'], totalTagihan: data['totalTagihan'], tab: listTab);
+  }*/
 }
 
 class BillingDataModel{
@@ -31,7 +31,7 @@ class BillingDataModel{
   String totalDeposit;
   String totalTagihan;
   List<TabModel> tab;
-  BillingDataModel({this.totalSummary, this.totalDeposit, this.totalTagihan, this.tab});
+  BillingDataModel({this.totalDeposit, this.totalSummary, this.totalTagihan, this.tab});
 }
 
 class BillingDataMoreModel{

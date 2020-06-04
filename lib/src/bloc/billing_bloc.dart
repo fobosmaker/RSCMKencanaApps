@@ -15,10 +15,11 @@ class BillingBloc{
       BillingModel data = await _repository.fetchDataBilling(patientId);
       print('fetchDataBilling: result $data');
       _inDataBilling.add(data);
-      print('fetchDataBilling: finish');
     } catch(e) {
+      print('fetchDataBilling: result error');
       _inDataBilling.addError(e);
     }
+    print('fetchDataBilling: finish');
   }
 
   StreamController<BillingDataMoreModel> moreData = StreamController<BillingDataMoreModel>.broadcast();
@@ -28,17 +29,17 @@ class BillingBloc{
     print('retrieveMoreDataBilling: run');
     try{
       BillingDataMoreModel data = await _repository.fetchcard(patientId, orgId, totalData);
+      print('retrieveMoreDataBilling: data $data');
       _getmoreData.add(data);
-      print('retrieveMoreDataBilling: finish');
     } catch(e) {
       _getmoreData.addError(e);
       print('retrieveMoreDataBilling: error');
     }
+    print('retrieveMoreDataBilling: finish');
   }
 
   dispose(){
     billingController.close();
     moreData.close();
   }
-
 }

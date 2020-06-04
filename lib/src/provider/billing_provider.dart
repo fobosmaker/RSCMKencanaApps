@@ -1,18 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-//import 'dart:math';
 import 'package:blocapiapp/src/model/billing_model.dart';
 import 'package:blocapiapp/src/model/card_example_model.dart';
 import 'package:blocapiapp/src/model/tab_model.dart';
-//import 'package:flutter/material.dart';
-//import 'package:http/http.dart' show Client, Response;
+
 class BillingProvider{
+
   Future<BillingModel> getDataBilling(String patientId) async {
+    print('getDataBilling: run');
     String url = 'https://www.rscm.co.id/apirscm/kencana.php';
     Map map = {
       "user_nm":"UMSI",
       "key":"091ae7a29c4795860f69b4077e8b432c",
-      //"patient_id":"68485",
       "patient_id":patientId,
       "fungsi":"getBilling"
     };
@@ -20,46 +19,63 @@ class BillingProvider{
     HttpClient clientReq = new HttpClient();
     clientReq.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
     try{
+      print('getDataBilling: success');
       HttpClientRequest req = await clientReq.postUrl(Uri.parse(url));
       req.headers.set('content-type', 'application/json');
       req.add(utf8.encode(body));
+
       HttpClientResponse response = await req.close();
+      print('getDataBilling response: ${response.headers}');
+
       String reply = await response.transform(utf8.decoder).join();
-      return new BillingModel(statusCode: jsonDecode(reply)['statusCode'], message: jsonDecode(reply)['message'],  data: convertGetBillingData(jsonDecode(reply)['data']) );
+      print('getDataBilling response transform: ${reply.toString()}');
+
+      final jsonData = jsonDecode(reply);
+      if(jsonData['data'].runtimeType == [].runtimeType){
+        print('getDataBiling response: data kosong');
+        return null;
+      } else {
+        print('getDataBiling response: data ada');
+        return new BillingModel( statusCode: jsonData['statusCode'], message: jsonData['message'],  data: convertGetBillingData(jsonData['data']) );
+      }
     } catch (e){
+      print('getDataBilling: failure');
       throw Exception(e);
     }
   }
 
   BillingDataModel convertGetBillingData(var data){
-    List<dynamic> tab = data['tab']; //setara tab
-    List<TabModel> listTab = [];
-    for(int i = 0; i < tab.length; i++){
-      var row = tab[i];
-      listTab.add(new TabModel(id: row['org_id'], content: row['org_nm'], total: row['total'], data:getBillingDetail(row['detail']) ));
+    print('convertGetBillingData: run');
+    var totalSummary = data['totalSummary'] == null ? "0": data['totalSummary'];
+    var totalDeposit = data['totalDeposit'] == null ? "0": data['totalDeposit'];
+    var totalTagihan = data['totalTagihan'] == null ? "0": data['totalTagihan'];
+    List<TabModel> groupTab = [];
+    if(data['tab'] != null){
+      print('convertGetBillingData: generate billing detail');
+      Map<String, dynamic> map = data['tab'];
+      map.forEach((key,val) => groupTab.add(new TabModel(id: map[key]['org_id'], content: map[key]['org_nm'], total: map[key]['total'], data:getBillingDetail(map[key]['detail']))));
     }
-    //print('item tab: ${listTab.length}');
-    return new BillingDataModel(totalSummary: data['totalSummary'],totalDeposit: data['totalDeposit'], totalTagihan: data['totalTagihan'],tab: listTab);
+    print('convertGetBillingData: result summary: $totalSummary, deposit: $totalDeposit, tagihan: $totalTagihan, data:${groupTab.length}');
+    return new BillingDataModel(totalSummary: totalSummary, totalDeposit: totalDeposit, totalTagihan: totalTagihan, tab:groupTab);
   }
   
-  List<CardExample> getBillingDetail(List<dynamic> detail){
+  List<CardExample> getBillingDetail(List<dynamic> data){
+    print('getBillingdetail: run');
     List<CardExample> listDetail = [];
-    for(int j = 0; j < detail.length; j++){
-      var row = detail[j];
-      //print(row2['item_nm']);
-      listDetail.add(new CardExample(id: row['item_id'], title: row['item_nm'],date: row['item_dttm'], description: row['item_desc'], price: row['tariff']));
-    }
+
+    print('getBillingdetail: generate card billing detail');
+    for(int j = 0; j < data.length; j++) listDetail.add(new CardExample(id: data[j]['item_id'], title: data[j]['item_nm'],date: data[j]['item_dttm'], description: data[j]['item_desc'], price: data[j]['tariff']));
+
+    print('getBillingdetail: generate card billing finish');
     return listDetail;
   }
 
   Future<BillingDataMoreModel> getMoreBillingDetail(String patientId, String orgId, int totalData) async{
+    print('getMoreBillingDetail run');
     String url = 'https://www.rscm.co.id/apirscm/kencana.php';
     Map map = {
       "user_nm":"UMSI",
       "key":"091ae7a29c4795860f69b4077e8b432c",
-      //"patient_id":"68485",
-      //"org_id":"1107",
-      //"record":5,
       "patient_id":patientId,
       "org_id":orgId,
       "record":totalData,
@@ -72,12 +88,21 @@ class BillingProvider{
       HttpClientRequest req = await clientReq.postUrl(Uri.parse(url));
       req.headers.set('content-type', 'application/json');
       req.add(utf8.encode(body));
+
       HttpClientResponse response = await req.close();
       String reply = await response.transform(utf8.decoder).join();
-      List<CardExample> data = getBillingDetail(jsonDecode(reply)['data']);
-      print('getMoreBillingDetail: ${data.length}');
-      return new BillingDataMoreModel(statusCode: jsonDecode(reply)['statusCode'], message: jsonDecode(reply)['message'],  data: getBillingDetail(jsonDecode(reply)['data']) );
+      final jsonData = jsonDecode(reply);
+      print('getMoreBillingDetail response: $jsonData');
+
+      if(jsonData['data'].runtimeType == [].runtimeType){
+        print('getMoreBillingDetail: data kosong');
+        return null;
+      } else {
+        print('getMoreBillingDetail: data ada');
+        return new BillingDataMoreModel(statusCode: jsonData['statusCode'], message: jsonData['message'],  data: getBillingDetail(jsonData['data']) );
+      }
     } catch (e){
+      print('getMoreBillingDetail: error');
       throw Exception(e);
     }
   }

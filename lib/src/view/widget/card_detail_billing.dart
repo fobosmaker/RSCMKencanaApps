@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 class WidgetCardDetailBilling extends StatefulWidget {
 
-  CardExample cardExample;
+  final CardExample cardExample;
 
   WidgetCardDetailBilling(this.cardExample);
 
@@ -26,7 +26,7 @@ class _WidgetCardDetailBillingState extends State<WidgetCardDetailBilling> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       child: Center(
         child: Card(
           child: Column(

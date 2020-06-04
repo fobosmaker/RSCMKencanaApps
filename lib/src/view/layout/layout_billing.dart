@@ -5,6 +5,7 @@ import 'package:blocapiapp/src/model/tab_model.dart';
 import 'package:blocapiapp/src/view/widget/card_billing_status.dart';
 import 'package:blocapiapp/src/view/widget/card_billing_with_detail.dart';
 import 'package:blocapiapp/src/view/widget/circle_point_detail_billing.dart';
+import 'package:blocapiapp/src/view/widget/widget_no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,10 +28,13 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
 
   TabController controller;
   NumberFormat formatter = new NumberFormat("#,###");
+  int tabLength;
 
   @override
   void initState() {
-    controller = new TabController(length: widget.data.data.tab.length, vsync: this);
+    tabLength = widget.data.data.tab.length;
+    controller = new TabController(length: tabLength, vsync: this);
+    print('tablength $tabLength');
     super.initState();
   }
 
@@ -48,7 +52,8 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
         backgroundColor: defaultAppbarColor,
         title: Text('Tagihan', style: TextStyle(color: defaultAppbarContentColor)),
       ),
-      body: NestedScrollView(
+      body: tabLength > 0 ?
+        NestedScrollView(
           headerSliverBuilder: (context, isScrolled){
             return <Widget>[
               SliverList(
@@ -107,7 +112,42 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
               controller: controller,
               children: generateTabView(widget.data.data.tab),
             ),
-      ),
+      )
+          :
+      ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          Container(padding: EdgeInsets.fromLTRB(15, 20, 0, 0), child: Text('Rangkuman', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
+          Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 10), child: Text('Poin-poin infromasi mengenai tagihan anda', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          CirclePointDetailBilling(title: 'Total', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalSummary))}', icon: Icons.receipt, color: Colors.blueAccent),
+                          CirclePointDetailBilling(title: 'Deposit', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalDeposit))}', icon: Icons.arrow_upward, color: Colors.greenAccent),
+                          CirclePointDetailBilling(title: 'Tagihan', content: 'Rp ${formatter.format(int.parse(widget.data.data.totalTagihan))}', icon: Icons.arrow_downward, color: Colors.deepOrangeAccent),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+            ),
+          ),
+          Container(padding: EdgeInsets.fromLTRB(15, 20, 0, 0), child: Text('Detail Tagihan', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),),
+          Container(padding: EdgeInsets.fromLTRB(15, 10, 0, 10), child: Text('Rincian detail dari poin-poin informasi tagihan anda', style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),),
+          WidgetNoData(title: "Data tidak ditemukan", subtitle: "Kami tidak dapat menemukan detail tagihan anda")
+        ],
+      )
     );
   }
 
@@ -125,7 +165,9 @@ class _VerticalLayoutBillingState extends State<VerticalLayoutBilling> with Sing
             dataTabModel[i].content,
             style: TextStyle(
                 color: Colors.white,
-                fontSize: 14
+                fontSize: 14,
+                fontWeight: FontWeight.w300,
+              letterSpacing: 0.5
             ),
           ),
         ),
@@ -282,9 +324,7 @@ class _HorizontalLayoutBillingState extends State<HorizontalLayoutBilling> with 
   List<Widget> generateTabView(){
     List<Widget> widget = [];
     for(int i = 0; i < dataTabModel.length; i++){
-      //widget.add(SingleChildScrollView(child: DynamicViewTab(dataTabModel[i]), scrollDirection: Axis.vertical,));
       widget.add(DynamicViewTab(dataTabModel[i]));
-
     }
     return widget;
   }
@@ -296,3 +336,4 @@ class _HorizontalLayoutBillingState extends State<HorizontalLayoutBilling> with 
     return list;
   }
 }
+

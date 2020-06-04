@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class DynamicViewTab extends StatefulWidget {
 
-  TabModel view;
+  final TabModel view;
   DynamicViewTab(this.view);
 
   @override
@@ -43,11 +43,36 @@ class _DynamicViewTabState extends State<DynamicViewTab> {
     for(var i = 0; i < listData.length; i++) list.add(WidgetCardDetailBilling(listData[i]));
     if(isClicked){
       list.add(StreamBuilder(
-          initialData: bloc.retrieveMoreDataBilling('68485',widget.view.id,listData.length),
+          initialData: bloc.retrieveMoreDataBilling('676033',widget.view.id,listData.length),
           stream: bloc.getmoreData,
           builder: (context, AsyncSnapshot snapshot){
             if(snapshot.connectionState == ConnectionState.active){
-              if(snapshot.hasData){
+              //if data empty
+              if(snapshot == null || !snapshot.hasData) {
+                WidgetsBinding.instance.addPostFrameCallback((_){
+                  setState(() {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("No data found..."),
+                    ));
+                    isClicked = false;
+                  });
+                });
+              }
+
+              //if data contains error
+              if(snapshot.hasError){
+                WidgetsBinding.instance.addPostFrameCallback((_){
+                  setState(() {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(snapshot.error.toString()),
+                    ));
+                    isClicked = false;
+                  });
+                });
+              }
+
+              //if data success
+              if(snapshot.hasData && snapshot != null){
                 BillingDataMoreModel dataMoreModel = snapshot.data;
                 //filter data for because there is some data in array and ind result
                 List<CardExample> filterData = [];
@@ -77,15 +102,6 @@ class _DynamicViewTabState extends State<DynamicViewTab> {
                       listData.addAll(filterData);
                       isClicked = false;
                     }
-                  });
-                });
-              } else { //throwing error!!!
-                WidgetsBinding.instance.addPostFrameCallback((_){
-                  setState(() {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(snapshot.error.toString()),
-                    ));
-                    isClicked = false;
                   });
                 });
               }

@@ -9,12 +9,36 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+  bool isRefresh = false;
+
+  @override
+  void initState() {
+    print('Home initState: run ');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('Home build: run ');
     //check user session
     new MySharedPreferences(context: context).checkBoolean();
 
-    return VerticalLayoutDraftHome();
+    return RefreshIndicator(
+        key:_refreshIndicatorKey,
+        child: VerticalLayoutDraftHome(),
+        onRefresh: refresh
+    );
+      
+      //VerticalLayoutDraftHome();
+  }
+
+  Future<Null> refresh() async {
+    print('refresh run');
+    /*setState(() {
+      isRefresh = true;
+    });
+    return (setState(() {}));*/
   }
 
   @override

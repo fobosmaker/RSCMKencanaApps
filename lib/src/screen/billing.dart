@@ -5,6 +5,7 @@ import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/layout/draft_home.dart';
 import 'package:blocapiapp/src/view/layout/draft_layout_billing.dart';
 import 'package:blocapiapp/src/view/layout/layout_billing.dart';
+import 'package:blocapiapp/src/view/widget/widget_no_data.dart';
 import 'package:flutter/material.dart';
 
 class BillingPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class BillingPage extends StatefulWidget {
 }
 
 class _BillingPageState extends State<BillingPage> {
-
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   final bloc = BillingBloc();
 
   @override
@@ -27,37 +28,50 @@ class _BillingPageState extends State<BillingPage> {
     super.dispose();
   }
 
+  Future<Null> refresh() async {
+    print('refresh run');
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
 
     //check user session
     new MySharedPreferences(context: context).checkBoolean();
 
+    //String id_pasien
+    String patientId = "676033";
+
     //if user login
     return Scaffold(
       body: StreamBuilder(
-        initialData: bloc.fetchDataBilling("1190155"),
-        stream: bloc.dataBilling,
-        builder: (context,AsyncSnapshot snapshot){
-          if(snapshot.connectionState == ConnectionState.active){
+          initialData: bloc.fetchDataBilling(patientId),
+          stream: bloc.dataBilling,
+          builder: (context,AsyncSnapshot snapshot){
+            if(snapshot.connectionState == ConnectionState.active){
 
-            //if error come from API
-            if(snapshot.hasError){
-              print(snapshot.error.toString());
-              return Page500();
+              //if error come from API
+              if(snapshot.hasError){
+                print(snapshot.error.toString());
+                return Page500();
+              }
+
+              //if there is no data
+              else if(!snapshot.hasData || snapshot.data == null){
+                print(snapshot.error.toString());
+                return  WidgetNoData(title: "Data tidak ditemukan", subtitle: "Kami tidak dapat menemukan tagihan anda");
+              }
+
+              //default return generate widget
+              else {
+                return generateWidget(snapshot.data);
+              }
             }
-
-            //if there is no data
-            if(!snapshot.hasData)  return PageNoData();
-
-            //default return generate widget
-            return generateWidget(snapshot.data);
-          }
-          //default run circular progress
-          return Center(child: CircularProgressIndicator());
-        }),
+            //default run circular progress
+            return Center(child: CircularProgressIndicator());
+          })
     );
-
   }
 
   Widget generateWidget(data){
