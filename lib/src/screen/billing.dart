@@ -1,11 +1,14 @@
 import 'package:blocapiapp/src/bloc/billing_bloc.dart';
+//import 'package:blocapiapp/src/bloc/sp_bloc.dart';
 import 'package:blocapiapp/src/screen/page_500.dart';
 import 'package:blocapiapp/src/screen/page_no_data.dart';
+//import 'package:blocapiapp/src/screen/page_no_data.dart';
 import 'package:blocapiapp/src/screen/shared_preferences.dart';
-import 'package:blocapiapp/src/view/layout/draft_home.dart';
-import 'package:blocapiapp/src/view/layout/draft_layout_billing.dart';
+//import 'package:blocapiapp/src/view/layout/draft_home.dart';
+//import 'package:blocapiapp/src/view/layout/draft_layout_billing.dart';
 import 'package:blocapiapp/src/view/layout/layout_billing.dart';
-import 'package:blocapiapp/src/view/widget/widget_no_data.dart';
+import 'package:blocapiapp/src/view/widget/widget_circular_progress.dart';
+//import 'package:blocapiapp/src/view/widget/widget_no_data.dart';
 import 'package:flutter/material.dart';
 
 class BillingPage extends StatefulWidget {
@@ -16,9 +19,35 @@ class BillingPage extends StatefulWidget {
 class _BillingPageState extends State<BillingPage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   final bloc = BillingBloc();
+  String patientId;
+  bool isLogin = false;
+  bool isGetPref = false;
 
   @override
   void initState() {
+    print('billing initState: run');
+    //if user login
+    MySharedPreferences sp = MySharedPreferences(context: context);
+    sp.getBool().then((bool){
+      if(!bool) sp.clearData();
+      else {
+        //if user has id
+        sp.getString().then((val){
+          if(val == null) sp.clearData();
+          else {
+            setState(() {
+              patientId = val;
+              isGetPref = true;
+            });
+          }
+        }, onError: (err){
+          print('sp getString $err');
+        });
+      }
+    }, onError:(err){
+      print('sp getBool $err');
+    });
+    print('billing initState: finish');
     super.initState();
   }
 
@@ -29,23 +58,17 @@ class _BillingPageState extends State<BillingPage> {
   }
 
   Future<Null> refresh() async {
+    //initState();
     print('refresh run');
   }
-
-
 
   @override
   Widget build(BuildContext context) {
 
-    //check user session
-    new MySharedPreferences(context: context).checkBoolean();
-
-    //String id_pasien
-    String patientId = "676033";
-
-    //if user login
+    print('billing build: run');
     return Scaffold(
-      body: StreamBuilder(
+      body: isGetPref == true ?
+      StreamBuilder(
           initialData: bloc.fetchDataBilling(patientId),
           stream: bloc.dataBilling,
           builder: (context,AsyncSnapshot snapshot){
@@ -60,7 +83,7 @@ class _BillingPageState extends State<BillingPage> {
               //if there is no data
               else if(!snapshot.hasData || snapshot.data == null){
                 print(snapshot.error.toString());
-                return  WidgetNoData(title: "Data tidak ditemukan", subtitle: "Kami tidak dapat menemukan tagihan anda");
+                return PageNoData(title: "Data tidak ditemukan", subtitle: "Tagihan anda tidak ditemukan didalam sistem kami, harap coba lagi lain waktu.");
               }
 
               //default return generate widget
@@ -69,21 +92,15 @@ class _BillingPageState extends State<BillingPage> {
               }
             }
             //default run circular progress
-            return Center(child: CircularProgressIndicator());
-          })
+            return Center(child: WidgetCircularProgress());
+          }) : Center(child: WidgetCircularProgress())
     );
   }
 
   Widget generateWidget(data){
     return OrientationBuilder(builder: (context, orientation) {
-      //Sesuai figma
-      return MediaQuery.of(context).size.width > 500 ? HorizontalLayoutBilling(data) : VerticalLayoutBilling(data);
-
-      //Draft
-      //return MediaQuery.of(context).size.width > 500 ? HorizontalLayoutDraftBilling(data) : VerticalLayoutDraftBilling(data);
-
-      //draft home
-      //return VerticalLayoutDraftHome();
+      return VerticalLayoutBilling(data);
+      //return MediaQuery.of(context).size.width > 500 ? HorizontalLayoutBilling(data) : VerticalLayoutBilling(data);
     });
   }
 }

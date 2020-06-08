@@ -31,13 +31,16 @@ class BillingProvider{
       print('getDataBilling response transform: ${reply.toString()}');
 
       final jsonData = jsonDecode(reply);
-      if(jsonData['data'].runtimeType == [].runtimeType){
-        print('getDataBiling response: data kosong');
-        return null;
-      } else {
-        print('getDataBiling response: data ada');
-        return new BillingModel( statusCode: jsonData['statusCode'], message: jsonData['message'],  data: convertGetBillingData(jsonData['data']) );
-      }
+      if(jsonData['statusCode'] == '200'){
+        print('getDataBiling response statusCode: 200');
+        if(jsonData['data'].runtimeType == [].runtimeType  || jsonData['data'] == 'gagal' || jsonData['data'] == null){
+          print('getDataBiling response: data kosong');
+          return null;
+        } else {
+          print('getDataBiling response: data ada');
+          return new BillingModel( statusCode: jsonData['statusCode'], message: jsonData['message'],  data: convertGetBillingData(jsonData['data']) );
+        }
+      } else throw Exception('Response error from server');
     } catch (e){
       print('getDataBilling: failure');
       throw Exception(e);
@@ -45,16 +48,20 @@ class BillingProvider{
   }
 
   BillingDataModel convertGetBillingData(var data){
+
     print('convertGetBillingData: run');
+
     var totalSummary = data['totalSummary'] == null ? "0": data['totalSummary'];
     var totalDeposit = data['totalDeposit'] == null ? "0": data['totalDeposit'];
     var totalTagihan = data['totalTagihan'] == null ? "0": data['totalTagihan'];
     List<TabModel> groupTab = [];
+
     if(data['tab'] != null){
       print('convertGetBillingData: generate billing detail');
       Map<String, dynamic> map = data['tab'];
       map.forEach((key,val) => groupTab.add(new TabModel(id: map[key]['org_id'], content: map[key]['org_nm'], total: map[key]['total'], data:getBillingDetail(map[key]['detail']))));
     }
+
     print('convertGetBillingData: result summary: $totalSummary, deposit: $totalDeposit, tagihan: $totalTagihan, data:${groupTab.length}');
     return new BillingDataModel(totalSummary: totalSummary, totalDeposit: totalDeposit, totalTagihan: totalTagihan, tab:groupTab);
   }
@@ -94,13 +101,15 @@ class BillingProvider{
       final jsonData = jsonDecode(reply);
       print('getMoreBillingDetail response: $jsonData');
 
-      if(jsonData['data'].runtimeType == [].runtimeType){
-        print('getMoreBillingDetail: data kosong');
-        return null;
-      } else {
-        print('getMoreBillingDetail: data ada');
-        return new BillingDataMoreModel(statusCode: jsonData['statusCode'], message: jsonData['message'],  data: getBillingDetail(jsonData['data']) );
-      }
+      if(jsonData['statusCode'] == '200'){
+        if(jsonData['data'].runtimeType == [].runtimeType){
+          print('getMoreBillingDetail: data kosong');
+          return null;
+        } else {
+          print('getMoreBillingDetail: data ada');
+          return new BillingDataMoreModel(statusCode: jsonData['statusCode'], message: jsonData['message'],  data: getBillingDetail(jsonData['data']) );
+        }
+      } else throw Exception('Response error from server');
     } catch (e){
       print('getMoreBillingDetail: error');
       throw Exception(e);

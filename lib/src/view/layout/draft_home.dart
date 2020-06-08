@@ -10,6 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 class VerticalLayoutDraftHome extends StatefulWidget {
 
+  final String medicalRecordNumber;
+  final String name;
+  VerticalLayoutDraftHome(this.medicalRecordNumber, this.name);
+
   @override
   _VerticalLayoutDraftHomeState createState() => _VerticalLayoutDraftHomeState();
 
@@ -67,7 +71,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               //card profile pasien
               Container(
                   padding: EdgeInsets.fromLTRB(0,0,0,5),
-                  child: cardProfile()
+                  child: cardProfile(widget.medicalRecordNumber, widget.name)
               ),
 
               //Menu

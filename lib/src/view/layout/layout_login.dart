@@ -1,9 +1,11 @@
 import 'package:blocapiapp/constant.dart';
 import 'package:blocapiapp/src/bloc/user_bloc.dart';
+import 'package:blocapiapp/src/model/login_model.dart';
 import 'package:blocapiapp/src/screen/home.dart';
 import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/screen/verification.dart';
 import 'package:blocapiapp/src/view/widget/form_input.dart';
+import 'package:blocapiapp/src/view/widget/widget_circular_progress.dart';
 import 'package:blocapiapp/src/view/widget/widget_logo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,22 +66,94 @@ class _HorizontalLayoutStateLogin extends State<HorizontalLayoutLogin> {
                             initialData: bloc.fetchDataLogin(userName.text,password.text),
                             stream: bloc.dataLogin,
                             builder: (context, AsyncSnapshot snapshot){
-                              print('cek state: ${snapshot.connectionState}');
                               if(snapshot.connectionState == ConnectionState.active){
+
+                                //if error come from API
+                                if(snapshot.hasError){
+                                  print('layout login ${snapshot.error.toString()}');
+                                  setState(() {
+                                    isClick = false;
+                                  });
+                                  return InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        //check validasi
+                                        if (_formLogin.currentState.validate()) {
+                                          isClick = true;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          color: defaultAppbarColor,
+                                          borderRadius: BorderRadius.circular(25)
+                                      ),
+                                      child: Text(
+                                        'Login',
+                                        style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                //default return generate widget
+                                else {
+                                  print('yeay');
+                                  return InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        //check validasi
+                                        if (_formLogin.currentState.validate()) {
+                                          isClick = true;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          color: defaultAppbarColor,
+                                          borderRadius: BorderRadius.circular(25)
+                                      ),
+                                      child: Text(
+                                        'Login',
+                                        style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );//generateWidget(snapshot.data);
+                                }
+                              }
+                              //default run circular progress
+                              return Center(child: WidgetCircularProgress());
+                              })
+
+                              //print('yeay');
+                              //return Container();
+                              //print('cek state: ${snapshot.connectionState}');
+                             /* if(snapshot.connectionState == ConnectionState.active){
                                 if(snapshot.hasData){
                                   //LoginModel result = snapshot.data;
-                                  //if(result.statusCode == "200") print('login sukses');
-                                  //else print(result.message);
-
-                                  //insert shared preferences (session)
-                                  MySharedPreferences sp = MySharedPreferences(context: this.context);
-                                  sp.saveData('yeay', true);
-
-                                  WidgetsBinding.instance.addPostFrameCallback((_){
-                                    setState(() {
-                                      isClick = false;
-                                      Navigator.pushReplacementNamed(context,'/home');
+                                 *//* if(result.statusCode == "200"){
+                                    print('login sukses');
+                                    //insert shared preferences (session)
+                                    MySharedPreferences sp = MySharedPreferences(context: this.context);
+                                    sp.saveData(pasienUjiCoba, true);
+                                    WidgetsBinding.instance.addPostFrameCallback((_){
+                                      setState(() {
+                                        isClick = false;
+                                        Navigator.pushReplacementNamed(context,'/home');
+                                      });
                                     });
+                                  }
+                                  else{
+                                    print('login status code error message ${result.message}');
+                                  }*//*
+                                  setState(() {
+                                    isClick = false;
                                   });
                                   return Container();
                                 }
@@ -91,8 +165,8 @@ class _HorizontalLayoutStateLogin extends State<HorizontalLayoutLogin> {
                                       child: CircularProgressIndicator()
                                   ),
                                 );
-                              }
-                            })
+                              }*/
+                           /* })*/
                             :
                         InkWell(
                           onTap: (){
@@ -217,20 +291,20 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                             ),
                           ),
                           isClick == true ?
-                          StreamBuilder(
+                         /* StreamBuilder(
                               initialData: bloc.fetchDataLogin(userName.text,password.text),
                               stream: bloc.dataLogin,
                               builder: (context, AsyncSnapshot snapshot){
                                 print('cek state: ${snapshot.connectionState}');
                                 if(snapshot.connectionState == ConnectionState.active){
                                   if(snapshot.hasData){
-                                    //LoginModel result = snapshot.data;
-                                    //if(result.statusCode == "200") print('login sukses');
-                                    //else print(result.message);
+                                    LoginModel result = snapshot.data;
+                                    if(result.statusCode == "200") print('login sukses');
+                                    else print(result.message);
 
                                     //insert shared preferences (session)
                                     MySharedPreferences sp = MySharedPreferences(context: this.context);
-                                    sp.saveData('yeay', true);
+                                    sp.saveData(pasienUjiCoba, true);
 
                                     WidgetsBinding.instance.addPostFrameCallback((_){
                                       setState(() {
@@ -249,6 +323,49 @@ class _VerticalLayoutStateLogin extends State<VerticalLayoutLogin> {
                                     ),
                                   );
                                 }
+                              })*/
+                          StreamBuilder(
+                              initialData: bloc.fetchDataLogin(userName.text,password.text),
+                              stream: bloc.dataLogin,
+                              builder: (context, AsyncSnapshot snapshot){
+                                if(snapshot.connectionState == ConnectionState.active){
+
+                                  if(snapshot.hasData) {
+                                    LoginModel data = snapshot.data;
+                                    if(data.statusCode == "200"){
+                                      print('loginResult: ${data.data.patient_id}');
+                                      MySharedPreferences sp = MySharedPreferences(context: this.context);
+                                      //sp.saveData(pasienUjiCoba, true);
+
+                                      print(data.data.toString());
+                                      sp.savePatientPref(data.data, true);
+
+                                      //print('yeay');
+                                      WidgetsBinding.instance.addPostFrameCallback((_){
+                                        setState(() {
+                                          isClick = false;
+                                          Navigator.pushReplacementNamed(context,'/home');
+                                        });
+                                      });
+                                    } else {
+                                      print('data error ${data.message}');
+                                    }
+                                  }
+
+                                  //if error come from API
+                                  if(snapshot.hasError || snapshot == null){
+                                    print('layout login ${snapshot.error.toString()}');
+                                  }
+
+                                  //default return generate widget
+                                  WidgetsBinding.instance.addPostFrameCallback((_){
+                                    setState(() {
+                                      isClick = false;
+                                    });
+                                  });
+                                }
+                                //default run circular progress
+                                return Center(child: WidgetCircularProgress());
                               })
                               :
                           InkWell(

@@ -51,7 +51,7 @@ class Page500 extends StatelessWidget {
                     )
                 )
             ),
-            Container(
+            /*Container(
                 color: Colors.white,
                 width: MediaQuery.of(context).size.width,
                 alignment: Alignment.center,
@@ -59,6 +59,42 @@ class Page500 extends StatelessWidget {
                   Navigator.pop(context);
                 }, icon: Icon(Icons.refresh, color: defaultAppbarColor,), label: Text('Refresh', style: TextStyle(
                     color: defaultAppbarColor)))
+            )*/
+           /* InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: defaultAppbarColor,
+                    borderRadius: BorderRadius.circular(25)
+                ),
+                child: Text(
+                  'Kembali',
+                  style: TextStyle(color: defaultAppbarContentColor, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )*/
+            InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: defaultAppbarContentColor,
+                    borderRadius: BorderRadius.circular(25)
+                ),
+                child: Text(
+                  'Kembali',
+                  style: TextStyle(color: defaultAppbarColor, letterSpacing: 0.5, fontWeight: FontWeight.w300),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             )
           ],
         ),

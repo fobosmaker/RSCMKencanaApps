@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     onTap: (){
                       if(_formRegistration.currentState.validate()){
                         MySharedPreferences sp = MySharedPreferences(context: this.context);
-                        sp.saveData('yeay', true);
+                        sp.saveData(pasienUjiCoba, true);
                         Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                       }
                     },

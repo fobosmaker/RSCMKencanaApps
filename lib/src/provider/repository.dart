@@ -13,13 +13,13 @@ class Repository{
 
 /*USER API*/
   //GET FROM API
-  Future<List<UserModel>> fetch_user_model() => userAPIProvider.fetchUser();
+  /*Future<List<UserModel>> fetch_user_model() => userAPIProvider.fetchUser();
   Future<List<UserPostModel>> fetch_user_post_model() => userAPIProvider.fetchUsersPost();
   Future<List<dynamic>> fetch_multi_provider() => userAPIProvider.getData();
-  Future<dynamic> fetch_data_multi_provider() => userAPIProvider.getMultiProvider();
+  Future<dynamic> fetch_data_multi_provider() => userAPIProvider.getMultiProvider();*/
 
   //POST TO API
-  Future addSave(String str) => userAPIProvider.addSave(str);
+  /*Future addSave(String str) => userAPIProvider.addSave(str);*/
 
   //LOGIN
   Future<LoginModel> login(String username, String password) => userAPIProvider.login(username,password);

@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  initialRoute: '/billing',
+  initialRoute: '/home',
   routes: {
     //no login
     '/splash': (context) => SplashScreenPage(),

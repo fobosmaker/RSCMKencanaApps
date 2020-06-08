@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top:10),
-              child: cardProfile(),
+              child: cardProfile(pasienUjiCoba,'kemal'),
             ),
             ListTile(
                 contentPadding: EdgeInsets.fromLTRB(15,20,15,0),

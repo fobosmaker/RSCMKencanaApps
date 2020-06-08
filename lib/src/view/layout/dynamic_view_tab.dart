@@ -112,7 +112,7 @@ class _DynamicViewTabState extends State<DynamicViewTab> {
           }
       ));
     } else {
-      if(!isFinal){
+      if(!isFinal && listData.length >= 5){
         list.add(FlatButton.icon(
               onPressed: (){
                 print('${widget.view.id} - with size ${widget.view.data.length}');
@@ -137,16 +137,5 @@ class _DynamicViewTabState extends State<DynamicViewTab> {
         },
         physics: BouncingScrollPhysics(),
       );
-    /*return SingleChildScrollView(
-      child: Container(
-        color: Colors.teal,
-        child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: list,
-        ),
-      ),
-    );*/
   }
 }
