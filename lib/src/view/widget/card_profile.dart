@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class cardProfile extends StatefulWidget {
+class CardProfile extends StatefulWidget {
   final String medicalRecordNumber;
   final String name;
-  cardProfile(this.medicalRecordNumber, this.name);
+  CardProfile(this.medicalRecordNumber, this.name);
   @override
-  _cardProfileState createState() => _cardProfileState();
+  _CardProfileState createState() => _CardProfileState();
 }
 
-class _cardProfileState extends State<cardProfile> {
+class _CardProfileState extends State<CardProfile> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +22,7 @@ class _cardProfileState extends State<cardProfile> {
         leading: CircleAvatar(
           radius: 40,
           child: Text(
-            'K',
+            widget.name[0].toUpperCase(),
             style: TextStyle(
                 fontWeight: FontWeight.w800,
                 color: Colors.white,

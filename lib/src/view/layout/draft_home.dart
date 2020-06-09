@@ -3,6 +3,7 @@ import 'package:blocapiapp/src/screen/SelectedImage.dart';
 import 'package:blocapiapp/src/screen/billing.dart';
 import 'package:blocapiapp/src/screen/content_edukasi.dart';
 import 'package:blocapiapp/src/screen/more_menu.dart';
+import 'package:blocapiapp/src/screen/page_under_construction.dart';
 import 'package:blocapiapp/src/view/widget/card_home.dart';
 import 'package:blocapiapp/src/view/widget/card_profile.dart';
 import 'package:blocapiapp/src/view/widget/circle_button_menu_home.dart';
@@ -71,7 +72,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
               //card profile pasien
               Container(
                   padding: EdgeInsets.fromLTRB(0,0,0,5),
-                  child: cardProfile(widget.medicalRecordNumber, widget.name)
+                  child: CardProfile(widget.medicalRecordNumber, widget.name)
               ),
 
               //Menu
@@ -80,9 +81,9 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    CircleButtonMenuHome(title: 'Tagihan', color: Colors.lightBlueAccent, icon: Icons.receipt, onclick: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => BillingPage())); }),
-                    CircleButtonMenuHome(title: 'Diet Pasien', color: Colors.redAccent, icon: Icons.restaurant_menu, onclick: (){ print('gizi clicked'); }),
-                    CircleButtonMenuHome(title: 'Gerai', color: Colors.orangeAccent, icon: Icons.fastfood, onclick: (){ print('tenant clicked'); }),
+                    CircleButtonMenuHome(title: 'Tagihan', color: Colors.lightBlueAccent, icon: Icons.receipt, onclick: () => Navigator.pushNamed(context,'/billing')),
+                    CircleButtonMenuHome(title: 'Diet Pasien', color: Colors.redAccent, icon: Icons.restaurant_menu, onclick: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => PageUnderConstruction())); }),
+                    CircleButtonMenuHome(title: 'Gerai', color: Colors.orangeAccent, icon: Icons.fastfood, onclick: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => PageUnderConstruction())); }),
                   ],
                 ),
               ),
@@ -247,7 +248,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                   padding: EdgeInsets.only(left:5, bottom: 5),
                   child: Text('Ikuti terus promo menarik kami', style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                 ),
-                trailing: Container(
+                /*trailing: Container(
                     child: InkWell(
                       child: Icon(
                         Icons.arrow_forward_ios,
@@ -257,7 +258,7 @@ class _VerticalLayoutDraftHomeState extends State<VerticalLayoutDraftHome> {
                         print('More Promosi');
                       },
                     )
-                ),
+                ),*/
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(15, 5, 0, 20),

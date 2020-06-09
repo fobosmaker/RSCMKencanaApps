@@ -1,13 +1,7 @@
 import 'dart:async';
 import 'package:blocapiapp/src/model/login_model.dart';
-/*
-import 'package:blocapiapp/src/model/multi_provider_model.dart';
-import 'package:blocapiapp/src/model/user_model.dart';
-import 'package:blocapiapp/src/model/user_post_model.dart';
-*/
 import 'package:blocapiapp/src/provider/repository.dart';
-//import 'package:rxdart/rxdart.dart';
-class userBLoc{
+class UserBLoc{
 
   final _repository = Repository();
   final _userLoginController = StreamController<LoginModel>.broadcast();
@@ -17,7 +11,7 @@ class userBLoc{
     print('fetchDataLogin: run');
     try{
       LoginModel data = await _repository.login(username, password);
-      print('fetchDataLogin: ${data.statusCode}, message: ${data.data.patient_id}, mrn: ${data.data.patient_nm}');
+      print('fetchDataLogin: ${data.statusCode}, patient_id: ${data.data.patientId}, patient_name: ${data.data.patientName}, patient_mrn: ${data.data.patientMRN}');
       _inDataLogin.add(data);
     } catch(e) {
       print('fetchDataLogin: error found');
@@ -31,4 +25,3 @@ class userBLoc{
   }
 
 }
-//final bloc = userBLoc();

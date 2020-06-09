@@ -42,7 +42,7 @@ class _CobaTabBarState extends State<CobaTabBar> with SingleTickerProviderStateM
           child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                cardProfile('1','k'),
+                CardProfile('1','k'),
                 Container(
                   padding: EdgeInsets.fromLTRB(4,8,4,4),
                   child: Text('Rangkuman tagihan'),
@@ -89,7 +89,7 @@ class _CobaTabBarState extends State<CobaTabBar> with SingleTickerProviderStateM
               expandedHeight: (MediaQuery.of(context).size.height * .3) - kToolbarHeight,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-                child: cardProfile('1','k'),
+                child: CardProfile('1','k'),
                 color: Colors.grey,),
             ),
             pinned: true,
@@ -99,7 +99,7 @@ class _CobaTabBarState extends State<CobaTabBar> with SingleTickerProviderStateM
               expandedHeight: (MediaQuery.of(context).size.height * .3) - kToolbarHeight,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-                child: cardProfile('1','k'),
+                child: CardProfile('1','k'),
                 color: Colors.grey,),
             ),
             pinned: true,

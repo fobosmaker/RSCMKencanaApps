@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:blocapiapp/src/model/login_model.dart';
+import 'package:blocapiapp/src/model/patient_model.dart';
 
 class UserProvider{
 
@@ -31,18 +32,17 @@ class UserProvider{
         print('UserProvider login response statusCode: 200');
         if(jsonData['data'].runtimeType == [].runtimeType  || jsonData['data'] == 'gagal' || jsonData['data'] == null){
           print('UserProvider login response: data kosong');
-          return null;
+          throw ('Data not found...');
         } else {
           print('UserProvider login response: data ada');
-          return new LoginModel( statusCode: jsonData['statusCode'], message: jsonData['message'], data: new LoginDataModel(patient_id: jsonData['data']['patient_id'], mrn: jsonData['data']['mrn'], patient_nm: jsonData['data']['patient_nm']) );
+          return new LoginModel( statusCode: jsonData['statusCode'], message: jsonData['message'], data: new PatientModel(patientId: jsonData['data']['patient_id'], patientMRN: jsonData['data']['patient_mrn'], patientName: jsonData['data']['patient_nm']) );
         }
       } else{
-        //print('UserProvider login response error');
-        throw Exception('Login failed!');
+        print('UserProvider login response error');
+        throw ('Login failed!');
       }
-      //return new LoginModel(statusCode: resultMap['statusCode'].toString(), message: resultMap['message'].toString(),data: new LoginDataModel(patient_id: resultMap['data']['patient_id'].toString(),mrn: resultMap['data']['mrn'].toString(), patient_nm: resultMap['data']['patient_nm'].toString()));
     } catch (e){
-      throw Exception(e);
+      throw (e);
     }
   }
 }

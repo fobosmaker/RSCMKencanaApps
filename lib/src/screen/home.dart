@@ -1,6 +1,6 @@
+import 'package:blocapiapp/src/screen/page_loading.dart';
 import 'package:blocapiapp/src/screen/shared_preferences.dart';
 import 'package:blocapiapp/src/view/layout/draft_home.dart';
-import 'package:blocapiapp/src/view/widget/widget_circular_progress.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   bool isRefresh = false;
-  bool isGetSP = false;
+  bool isGetPref = false;
   String patientId;
   String patientName;
   String patientMRN;
@@ -31,38 +31,26 @@ class _HomePageState extends State<HomePage> {
             sp.getPatientName().then((patientName){
               this.patientName = patientName;
               print('initstate: $patientName');
+              //reload state
+              setState(() => isGetPref = true);
             });
           } else sp.clearData();
         });
       } else sp.clearData();
     });
-   /* sp.getBool().then((bool){
-      if(!bool) sp.clearData();
-      else {
-        sp.getString().then((val){
-          if(val == null) sp.clearData();
-          else{
-            setState(() {
-              isGetSP = true;
-              medicalRecordNumber = val;
-            });
-          }
-        }, onError:(err) => print('sp getString $err'));
-      }
-    },onError:(err) => print('sp getBool $err'));*/
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     print('Home build: run ');
-    return isGetSP == true ? VerticalLayoutDraftHome(patientMRN,patientName) : Center(child: WidgetCircularProgress());
+    return isGetPref == true ? VerticalLayoutDraftHome(patientMRN,patientName) : PageLoading();
   }
 
   Future<Null> refresh() async {
     print('refresh run');
     setState(() {
-      isGetSP = false;
+      //isGetSP = false;
     });
     /*setState(() {
       isRefresh = true;

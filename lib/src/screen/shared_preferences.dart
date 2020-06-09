@@ -1,4 +1,5 @@
 import 'package:blocapiapp/src/model/login_model.dart';
+import 'package:blocapiapp/src/model/patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,13 +15,13 @@ class MySharedPreferences{
 
   MySharedPreferences({this.context});
 
-  Future<void> savePatientPref(LoginDataModel data, bool isLogin) async {
+  Future<void> savePatientPref(PatientModel data, bool isLogin) async {
     print('MySharedPreferences: savePatientPref run');
     SharedPreferences pref = await SharedPreferences.getInstance();
-    print('MySharedPreferences: savePatientPref data ${data.patient_id} ${data.patient_nm} ${data.mrn}');
-    pref.setString(patientId, data.patient_id);
-    pref.setString(patientMRN, data.mrn);
-    pref.setString(patientName, data.patient_nm);
+    print('MySharedPreferences: savePatientPref data ${data.patientId} ${data.patientName} ${data.patientMRN}');
+    pref.setString(patientId, data.patientId);
+    pref.setString(patientMRN, data.patientMRN);
+    pref.setString(patientName, data.patientName);
     pref.setBool(patientIsLogin, isLogin);
   }
 
@@ -52,6 +53,13 @@ class MySharedPreferences{
     return pref.getString(patientName) ?? null;
   }
 
+  void clearData() async {
+    print('MySharedPreferences: clearData run');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear();
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
 
 
   Future<void> saveData(String string, bool bool) async {
@@ -75,12 +83,7 @@ class MySharedPreferences{
     return pref.getString(myStringKey) ?? null;
   }
 
-  void clearData() async {
-    print('MySharedPreferences: clearData run');
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.clear();
-    Navigator.pushReplacementNamed(context, '/login');
-  }
+
 
   void checkBoolean() {
     print('MySharedPreferences: checkboolean run');
